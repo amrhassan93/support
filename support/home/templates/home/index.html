@@ -20,7 +20,7 @@
 </head>
 
 <body>
-
+    <!-- Start of NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
@@ -58,10 +58,18 @@
             </div>
         </div>
     </nav>
+    <!-- End OF NAVBAR -->
+
     {% block content %} {% endblock %} {% block js %} {% endblock %}
 
 
-    <section id="footer" class="fixed-bottom">
+    {% block body %}
+
+    {% endblock %}
+
+     <!-- <Start of FOOTER > -->
+
+        <section id="footer" class="fixed-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-6">
@@ -73,13 +81,13 @@
                 </div>
                 <div class="col-6">
                     <div class="copy">
-                        <span class="lang" Key="COPYRIGHT">Copyright &copy; 2020 </span><a href="https://nothing-real.netlify.app/" target="_blanck">&nbsp; Nothing Real</a>
+                        <span class="lang" Key="COPYRIGHT">Copyright &copy; 2020 </span><a href="#" target="_blanck">&nbsp; Crowd Funding team</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+<!-- End OF NAVBAR -->
 </body>
 
 </html>
