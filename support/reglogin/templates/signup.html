@@ -1,15 +1,54 @@
-{% load static %}
-<html lang="en">
+{% extends 'home/index.html' %} {% load static %}
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>register</title>
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    {% block style %}
+    <link rel="stylesheet" href="{% static '/css/signup.css' %}">{% endblock %}
 </head>
 
 <body>
+    {% block content %}
+    <div class="container pt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 card login-form">
+                {% if form.errors %}
+                <p style="color: red;">{{ form.errors }}</p>
+                {% endif %}
+                <form method="POST">
+                    <div class="form-group">
+                        <h1 class="text-center">Registeration</h1>
+                        <hr>
+                        <label for="Firstname ">First Name</label>
+                        <input type="text" name="fname " class="form-control " id="fname1 " placeholder="Enter Your First Name ">
+                        <label for="Lastname ">Last Name</label>
+                        <input type="text" name="lname " class="form-control " id="lname1 " placeholder="Enter Your Last Name ">
+                        <label for="Email">Email address</label>
+                        <input type="email" name="email " class="form-control " id="email2 " placeholder="Enter Your Email ">
+                        <small id="emailtip " class="form-text text-muted "> Enter a Valid Email Address.</small>
+                        <label for="Password "> Password</label>
+                        <input type="password" name="password " class="form-control " id="Password2" placeholder="Password ">
+                        <small id="passtip " class="form-text text-muted ">Your password Must have: 
+                            <ul><li>At Least 8 char</li>
+                            <li>1 Uppercase Letter</li>
+                            <li>1 Number</li>
+                            <li>1 symbol</li></ul>
+                        </small>
+                        <label for="Password "> Confirm Password</label>
+                        <input type="password" name="password " class="form-control " id="Password3" placeholder="Password ">
+                        <label for="phone ">Phone Number</label>
+                        <input type="text" name="phone " class="form-control " id="phone " placeholder="Enter Your Mobile Number "><br>
+                        <input type="file" name="image">
+                        <button type="submit">Upload Image</button> <br><br>
+                        <button type="submit " class="btn btn-primary">Confirm</button> <br>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br> {% endblock %}
 
 </body>
-
-</html>
