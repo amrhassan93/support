@@ -1,55 +1,397 @@
 {% extends 'home/index.html' %}
 
-<!-- {% load static %} -->
+{% load static %}
 
 
 {% block style %}
 
 
-<link rel="stylesheet" href=""> {% endblock %}
+<link rel="stylesheet" href="{% static 'home/css/ho.css'%}"> {% endblock %}
 
 {% block content %}
 
 <div class="container-fluid">
-
-    <div id="demo" class="carousel slide" data-ride="carousel">
+<!-- start OF Container -->
+  <!-- start of Carosel slide -->
+    <div id="demo" class="carousel slide text-center" data-ride="carousel">
         <ul class="carousel-indicators">
           <li data-target="#demo" data-slide-to="0" class="active"></li>
           <li data-target="#demo" data-slide-to="1"></li>
           <li data-target="#demo" data-slide-to="2"></li>
-          <li data-target="#demo" data-slide-to="2"></li>
+          <li data-target="#demo" data-slide-to="3"></li>
         </ul>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{% static 'home/images/1.jpg' %}" alt="crowdfunding" width="1100" height="500">
+            <img src="{% static 'home/images/1.jpg' %}" alt="crowdfunding" >
             <div class="carousel-caption">
-              <h3></h3>
-              <p></p>
+              <h1 >CrowdFunding</h1>
+              <p style="font-size:30px;font-weight:bold;">The practice of funding a project or venture by raising small amounts of money from a large number of people</p>
             </div>   
           </div>
           <div class="carousel-item">
-            <img src="{% static 'home/images/2.jpg' %}" alt="crowdfunding" width="1100" height="500">
+            <img src="{% static 'home/images/2.jpg' %}" alt="crowdfunding"  >
             <div class="carousel-caption">
-              <h3></h3>
-              <p></p>
+              <h2>Help</h2>
+              <p style="font-size:30px;font-weight:bold;">We need Your Aid to Help Poor People</p>
             </div>   
           </div>
           <div class="carousel-item">
-            <img src="{% static 'home/images/3.jpg' %}"alt="crowdfunding" width="1100" height="500">
+            <img src="{% static 'home/images/3.jpg' %}"alt="crowdfunding" >
             <div class="carousel-caption">
-              <h3></h3>
-              <p></p>
-            </div>   
+              <h1>Donation</h1>
+              <p style="font-size:30px;font-weight:bold;"> Gift for charity, humanitarian aid, or to benefit a cause.</p>
+            </div> 
+          </div>  
             <div class="carousel-item">
-                <img src="{% static 'home/images/4.jpg' %}" alt="crowdfunding" width="1100" height="500">
+                <img src="{% static 'home/images/4.jpg' %}" alt="crowdfunding">
                 <div class="carousel-caption">
-                  <h3></h3>
-                  <p></p>
+                  <h1>Crowdfunding </h1>
+                  <p style="font-size:30px;font-weight:bold;">Has been used to fund a wide range of for-profit, entrepreneurial ventures such as artistic and creative projects, medical expenses, travel, and community-oriented social entrepreneurship projects</p>
                 </div>   
+              </div>
+        </div>
+      </div>
+        <!-- <end of Carousel slide> -->
+
+          <!-- carosel controls -->
+      <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+            <!-- ******************************** -->
+           <!-- ******************************** -->
+
+            <!-- /////////Top Rated Projects////////// -->
+    <div class="container top_rated  text-center">
+
+    <div class="row justify-content-center">
+      <div class="card pro1">
+        <h1 style="background-color: rgb(95, 90, 90)">Top Rated Projects</h1>
+      <img class="card-img-top text-center" src="{% static 'home/images/5.jpg' %}" alt="project1" style="width:100%">
+      
+      </div>
+      </div>
+    </div>
+      <!-- ********************* 1ST Container of Projects************* -->
+      <div class="container fix_cont text-center">
+
+      <div class="row justify-content-center">
+        <div class="col-md-4" width="33.3%">
+          <div class="card pro2" >
+            <img class="card-img-left text-center" src="{% static 'home/images/6.jpg' %}" alt="project2" style="width:100%">
+             <div class="card-body">
+              <h5>Star Citizen Video Game Project</h5>
+              <p> Project still ongoing and its aim was to earn 2M $ But the amount raised now to 300M $</p>
+              <br><br>
+          <a href="#" class="btn btn-primary">See More</a>
+
+           </div>
+         </div>  
+     </div>
+
+    <div class="col-md-4" width="33.3%">
+        <div class="card pro3" >
+          <img class="card-img-center text-center" src="{% static 'home/images/7.jpg' %}" alt="project3" style="width:100%">
+           <div class="card-body">
+            <h5>EOS Blockchain Project</h5>
+            <p>	EOS is a blockchain operating system designed to support commercial decentralized applications.
+             The project started at June 1, 2018 and the amount raised now to 4M $ 
+            </p>
+        <a href="#" class="btn btn-primary">See More</a>
+
+       </div>  
+   </div>
+  </div>
+
+    <div class="col-md-4 " width="33.3%" >
+      <div class="card pro4" >
+        <img class="card-img-right text-center" src="{% static 'home/images/8.jpg' %}" alt="project4" style="width:100%">
+         <div class="card-body">
+          <h5>Filecoin Blockchain Project</h5>
+          <p>	Filecoin is a decentralized data storage application , project started at September 7, 2017 and the amount raised  now to 257M $</p>
+          <a href="#" class="btn btn-primary">See More</a>
+      
+     </div>  
+ </div>
+</div>
+</div>
+
+
+<!-- *****************************2nd container of projects************* -->
+
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card pro5" >
+          <img class="card-img-left text-center" src="{% static 'home/images/9.jpg' %}" alt="project5" style="width:100%">
+           <div class="card-body">
+             
+            <h5>Tezos	 Blockchain Project</h5>
+            <p>		Tezos is a self-governing blockchain , project started at July 14, 2017 and the amount raised  now to 232M $</p>
+        <a href="#" class="btn btn-primary">See More</a>
+
+         </div>
+       </div>  
+   </div>
+
+    <div class="col-md-6">
+      <div class="card pro6" >
+        <img class="card-img-right text-center" src="{% static 'home/images/10.jpg' %}" alt="project6" style="width:100%">
+         <div class="card-body">
+          <h5>Sirin Labs (SRN) Mobile Project</h5>
+          <p>			A blockchain phone that makes it easier to use digital currency. Expected to sell for over $1000 with 25,000 units pre-ordered , project started at December, 2017	 and the amount raised  now to 158M $</p>
+      <a href="#" class="btn btn-primary">See More</a>
+
+       </div>
+     </div>  
+ </div>
+</div>
+</div>
+    <!-- end of containers -->
+
+
+
+<!-- ********************* Top Fundraiser ************* -->
+<div class="container fund_raise text-center">
+
+  <h1 style="background-color: rgb(95, 90, 90)">Top Fundraiser</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-4" >
+      <div class="card fund1" >
+        <img class="card-img-left text-center" src="{% static 'home/images/11.jpg' %}" alt="fundraise1" style="width:100%">
+         <div class="card-body">
+          <h5>Support me to complete my research</h5>
+          <p>Hello my name is Harry please Support me To complete my scientific research</p>
+          <div class="progress" >
+            <div class="progress-bar" style="width:20%"></div>
+            <span>&euro;6000 <b>Raised </b> of &euro;30,000</span>
           </div>
         </div>
-        
+
+       </div>
+     </div>  
+
+<div class="col-md-4" >
+    <div class="card fund2" >
+      <img class="card-img-center text-center" src="{% static 'home/images/12.jpg' %}" alt="fundraise2" style="width:70%">
+       <div class="card-body">
+        <h5>Support DHA Association</h5>
+      <p>	support Delware Humane Association to make friends for ever </p>
+      <div class="progress">
+        <div class="progress-bar" style="width:50%"></div>
+        <span>&euro;50,000 <b>Raised </b> of &euro;100,000</span>
       </div>
+    </div>
+
+   </div>  
 </div>
+
+<div class="col-md-4 ">
+  <div class="card fund3"  >
+    <img class="card-img-right text-center" src="{% static 'home/images/13.jpg' %}" alt="fundraise3" style="width:100%">
+     <div class="card-body">
+      <h5>Support IHA to help saving life</h5>
+      <p>	support IHA organization to  make help us for saving more lives</p>
+      <div class="progress">
+        <div class="progress-bar" style="width:60%"></div>
+        <span>&euro;300,000 <b>Raised </b> of &euro;500,000</span>
+      </div>
+    </div>
+ </div>  
+</div>
+</div>
+</div>
+
+<!-- **********************End Of FunRaiser**************** -->
+
+
+<!-- ********************* Top Three of Featured Projects ************* -->
+
+<div class="container feat_pro text-center">
+
+  <h1 style="background-color: rgb(95, 90, 90)">top 5 Featured projects</h1>
+ <div class="row justify-content-center">
+
+  <div class="col-md-4" width="33.3%">
+    <div class="card ft1" >
+      <img class="card-img-left text-center" src="" alt="" style="background-color:rgb(35, 19, 110);">
+       <div class="card-body">
+        <h3> Featured Project1 </h3>
+        <p> project</p>
+        <br><br>
+    <a href="#" class="btn btn-primary">See More</a>
+
+     </div>
+   </div>  
+</div>
+
+<div class="col-md-4" width="33.3%">
+  <div class="card ft2" >
+    <img class="card-img-center text-center" src="" alt="" style="background-color: rgb(26, 70, 82);">
+     <div class="card-body">
+      <h3> Featured project2</h3>
+      <p> project</p>
+      <a href="#" class="btn btn-primary">See More</a>
+
+ </div>  
+</div>
+</div>
+
+<div class="col-md-4 " width="33.3%" >
+<div class="card ft3" >
+  <img class="card-img-right text-center" src="" alt="" style="background-color: rgb(122, 170, 60);">
+   <div class="card-body">
+    <h3> Featured project3</h3>
+    <p> project</p>
+    <a href="#" class="btn btn-primary">See More</a>
+
+</div>  
+</div>
+</div>
+</div>
+
+
+<!-- *****************************Last  two  OF FEATURED PROject ************* -->
+
+<div class="row justify-content-center">
+<div class="col-md-6">
+  <div class="card ft4" >
+    <img class="card-img-left text-center" src="" alt="" style="background-color: rgb(143, 12, 38);">
+     <div class="card-body">
+       
+      <h3> Featured project4</h3>
+      <p> project</p>
+
+  <a href="#" class="btn btn-primary">See More</a>
+
+   </div>
+ </div>  
+</div>
+
+<div class="col-md-6">
+<div class="card ft5" >
+  <img class="card-img-right text-center" src="" alt="" style="background-color: rgb(128, 12, 143);">
+   <div class="card-body">
+    <h3> Featured project5</h3>
+    <p> project</p>
+
+<a href="#" class="btn btn-primary">See More</a>
+
+ </div>
+</div>  
+</div>
+</div>
+</div>
+<!-- end of 5 list  Featured Project containers -->
+
+<!-- **************************** -->
+
+
+ <!-- ********************* 5 lists of Projects (1st three) ************* -->
+      <div class="container fix_pro text-center">
+        <h1 style="background-color: rgb(95, 90, 90)">top 5 list projects</h1>
+       <div class="row justify-content-center">
+
+        <div class="col-md-4" width="33.3%">
+          <div class="card ls1" >
+            <img class="card-img-left text-center" src="" alt="" style="background-color:red;">
+             <div class="card-body">
+              <h3> Project1 </h3>
+              <p> project</p>
+              <br><br>
+          <a href="#" class="btn btn-primary">See More</a>
+
+           </div>
+         </div>  
+     </div>
+
+    <div class="col-md-4" width="33.3%">
+        <div class="card ls2" >
+          <img class="card-img-center text-center" src="" alt="" style="background-color: coral;">
+           <div class="card-body">
+            <h3>project2</h3>
+            <p> project</p>
+            <a href="#" class="btn btn-primary">See More</a>
+
+       </div>  
+   </div>
+  </div>
+
+    <div class="col-md-4 " width="33.3%" >
+      <div class="card ls3" >
+        <img class="card-img-right text-center" src="" alt="" style="background-color: cornflowerblue;">
+         <div class="card-body">
+          <h3>project3</h3>
+          <p> project</p>
+          <a href="#" class="btn btn-primary">See More</a>
+      
+     </div>  
+ </div>
+</div>
+</div>
+
+
+<!-- *****************************Last of two************* -->
+
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card ls4" >
+          <img class="card-img-left text-center" src="" alt="" style="background-color: crimson;">
+           <div class="card-body">
+             
+            <h3>project4</h3>
+            <p> project</p>
+
+        <a href="#" class="btn btn-primary">See More</a>
+
+         </div>
+       </div>  
+   </div>
+
+    <div class="col-md-6">
+      <div class="card ls5" >
+        <img class="card-img-right text-center" src="" alt="" style="background-color: rgb(231, 43, 10);">
+         <div class="card-body">
+          <h3>project5</h3>
+          <p> project</p>
+
+      <a href="#" class="btn btn-primary">See More</a>
+
+       </div>
+     </div>  
+ </div>
+</div>
+</div>
+    <!-- end of 5 list  containers -->
+
+
+<!-- *******************Catigories****************** -->
+  <div class="container text-center">
+    <h1 style="background-color: rgb(95, 90, 90)">Categories</h1>
+
+    
+    <button type="button" class="btn btn-primary">Donate To Blind People</button>
+    <button type="button" class="btn btn-secondary">Donate to Coronavirus Victims</button>
+    <button type="button" class="btn btn-success">Donate to Poor People</button>
+    <button type="button" class="btn btn-info">Donate to Hostpitals</button>
+    <button type="button" class="btn btn-warning">Donate to Hostpitals</button>
+    <button type="button" class="btn btn-danger">Donate to Poor People</button>
+    <button type="button" class="btn btn-dark">Donate To Hurricane Victims</button>
+    <button type="button" class="btn btn-light">Donate to Coronavirus Victim</button>
+    <button type="button" class="btn btn-link">donate To Blind People</button>      
+<br><br>
+<br>
+<br>
+<br>
+<br>
+  </div>
+
+<!-- //////////////////////////////////End oF Catigories////////////////// -->
+
+
+
+</div>
+    
 
 {% endblock %}

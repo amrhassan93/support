@@ -8,14 +8,14 @@
     <title>base</title>
 
     {% block style %} {% endblock %}
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/index.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/all.min.css' %}">
 
-    <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
-    <script src="{% static 'js/popper.min.js'%}"></script>
-    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'home/js/jquery-3.4.1.min.js'%}"></script>
+    <script src="{% static 'home/js/popper.min.js'%}"></script>
+    <script src="{% static 'home/js/bootstrap.min.js'%}"></script>
 
 </head>
 
@@ -60,12 +60,15 @@
     </nav>
     <!-- End OF NAVBAR -->
 
-    {% block content %} {% endblock %} {% block js %} {% endblock %}
+    {% block content %}
+
+     {% endblock %}
+
+     {% block js %}
+     
+     {% endblock %}
 
 
-    {% block body %}
-
-    {% endblock %}
 
      <!-- <Start of FOOTER > -->
 
