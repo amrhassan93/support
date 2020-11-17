@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'support.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pollssupport_app',
+        'NAME': 'support_app',
         'HOST': 'localhost',
         'USER':'postgres',
         'PASSWORD': '569395',
