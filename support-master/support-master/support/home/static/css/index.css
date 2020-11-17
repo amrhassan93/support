@@ -1,0 +1,30 @@
+#footer {
+    background-color: #000;
+    min-height: 60px;
+    color: #fff;
+    text-align: center;
+}
+
+#footer .followUs i {
+    padding: 5px;
+    margin: 5px;
+    -webkit-transition: all;
+    transition: all;
+    -webkit-transition-duration: .25s;
+    transition-duration: .25s;
+    margin-top: 12px;
+    font-size: 20px;
+}
+
+#footer .followUs i:hover {
+    color: #31A2B7;
+}
+
+#footer .copy {
+    margin-top: 12px;
+}
+
+#footer a {
+    color: #fff;
+    text-decoration: none;
+}
