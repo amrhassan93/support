@@ -31,9 +31,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+<<<<<<< HEAD:support/support/support/settings.py
     'home.apps.HomeConfig',
     'reglogin.apps.RegloginConfig',
     'my_profile.apps.MyProfileConfig',
+=======
+    'projects.apps.ProjectsConfig',
+    'home.apps.HomeConfig',
+    'reglogin.apps.RegloginConfig',
+>>>>>>> 3848eba426506248a38623c8a3c31d663f0fbe37:support/support/settings.py
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,8 +84,12 @@ WSGI_APPLICATION = 'support.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'support_app',
+        'HOST': 'localhost',
+        'USER':'postgres',
+        'PASSWORD': '569395',
+        'PORT': '5432',
     }
 }
 
