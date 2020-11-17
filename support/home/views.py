@@ -7,3 +7,6 @@ def view_index(request):
 
 def view_home(request):
     return render(request , 'home/home.html')
+
+# def create_home(request):
+#     return render(request, 'home/create_home.html') 
