@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'support.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pollssupport_app',
+        'HOST': 'localhost',
+        'USER':'postgres',
+        'PASSWORD': '569395',
+        'PORT': '5432',
     }
 }
 
