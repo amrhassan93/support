@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'projects.apps.ProjectsConfig',
     'home.apps.HomeConfig',
     'reglogin.apps.RegloginConfig',
+    'my_profile.apps.MyProfileConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
