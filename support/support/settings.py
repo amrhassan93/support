@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -84,7 +85,7 @@ DATABASES = {
         'HOST': 'localhost',
         'USER':'postgres',
         'PASSWORD': '569395',
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 

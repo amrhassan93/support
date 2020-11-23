@@ -64,7 +64,6 @@ class CommentReply(models.Model):
 
 
 
-
 # 1- create db lacaly  => create database support_app
 # 2- python manage.py makemigrations 
 # 3- python3 manage.py migrate
