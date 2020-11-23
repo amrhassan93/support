@@ -22,38 +22,38 @@ from datetime import datetime
 def all_project(request):
     return render(request , 'projects/all_projects.html')
 
-# def showProject(request, id):
-#     item = Project.objects.get(id=id)
-#     pPics = ProjectPicture.objects.all().filter(project_id=id)
-#     relatedProjects = Project.objects.all().filter(category_id=item.category)
-#     rate = item.rate_set.all().aggregate(Avg("value"))["value__avg"]
-#     rate = rate if rate else 0
-#     rate = Decimal(rate).quantize(0, ROUND_HALF_UP)
-#     today = datetime.now()
-#     start_date = item.start_date
-#     end_date = item.end_date
-#     myFormat = "%Y-%m-%d %H:%M:%S"
-#     today = today.strftime(myFormat)
-#     today = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
-#     start_date = start_date.strftime(myFormat)
-#     start_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
-#     end_date = end_date.strftime(myFormat)
-#     end_date = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S")
-#     donate = item.donation_set.all().aggregate(Sum("amount"))
-#     context = {'pData': item,
-#                'pPics': pPics,
-#                'rate': rate,
-#                'today': today,
-#                'start_date': start_date,
-#                'end_date': end_date,
-#                'relatedProjs': relatedProjects,
-#                'donations_amount': donate["amount__sum"] if donate["amount__sum"] else 0}
+def showProject(request, id):
+    # item = Project.objects.get(id=id)
+    # pPics = ProjectPicture.objects.all().filter(project_id=id)
+    # relatedProjects = Project.objects.all().filter(category_id=item.category)
+    # rate = item.rate_set.all().aggregate(Avg("value"))["value__avg"]
+    # rate = rate if rate else 0
+    # rate = Decimal(rate).quantize(0, ROUND_HALF_UP)
+    # today = datetime.now()
+    # start_date = item.start_date
+    # end_date = item.end_date
+    # myFormat = "%Y-%m-%d %H:%M:%S"
+    # today = today.strftime(myFormat)
+    # today = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+    # start_date = start_date.strftime(myFormat)
+    # start_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+    # end_date = end_date.strftime(myFormat)
+    # end_date = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S")
+    # donate = item.donation_set.all().aggregate(Sum("amount"))
+    # context = {'pData': item,
+    #            'pPics': pPics,
+    #            'rate': rate,
+    #            'today': today,
+    #            'start_date': start_date,
+    #            'end_date': end_date,
+    #            'relatedProjs': relatedProjects,
+    #            'donations_amount': donate["amount__sum"] if donate["amount__sum"] else 0}
 
-#     if request.user:
-#         user_rate = item.rate_set.filter(
-#             user_id=request.user.profile.id).first()
-#         if user_rate:
-#             context["user_rate"] = user_rate.value
+    # if request.user:
+    #     user_rate = item.rate_set.filter(
+    #         user_id=request.user.profile.id).first()
+    #     if user_rate:
+    #         context["user_rate"] = user_rate.value
     return render(request, "projects/view_Project.html", context)
 
 def create(request):
