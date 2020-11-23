@@ -1,67 +1,92 @@
-import datetime
-from django.db import models
+
+from __future__ import unicode_literals
 from django.utils import timezone
+from django.db import models
+from datetime import datetime
+from django.template.defaultfilters import slugify
+from taggit.managers import TaggableManager
+from django.core.validators import MaxValueValidator, MinValueValidator
 from reglogin.models import Users
+
+# from users.models import Profile
+
+
 
 # Create your models here.
 
 
 class Category(models.Model):
     cat_name = models.CharField(max_length=50)
+    cat_icon = models.ImageField(upload_to='static/projects/images/', default=True)
+
 
     def _str_(self):
         return self.cat_name
 
-class Tags(models.Model):
-    tag_name = models.CharField(max_length=50)
-
-    def _str_(self):
-        return self.tag_name
-
 
 class Project(models.Model):
-    title= models.CharField(max_length=100)
-    details= models.CharField(max_length=1000)
-    target= models.FloatField()
-    created_at= models.DateField(timezone.now())
-    start_date= models.DateField()
-    end_date= models.DateField()
-    images = models.ImageField()
-    total_rate = models.FloatField()
+    
+    title = models.CharField(max_length=45)
+    details = models.TextField(max_length=3000)
+    target = models.IntegerField()
+    start_date = models.DateTimeField(default=timezone.now)
+    end_date = models.DateTimeField(default=timezone.now)
     is_featured = models.BooleanField(default=False)
-    user_id = models.ForeignKey(Users , on_delete = models.CASCADE)
-    category_id = models.ForeignKey(Category , on_delete = models.CASCADE)
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    tags = TaggableManager()
+    created_at = models.DateTimeField(auto_now_add=True)
+
 
     def _str_(self):
         return self.title
 
 class Rating(models.Model):
-    rate = models.FloatField()
-    project_id = models.ForeignKey(Project , on_delete = models.CASCADE)
-    user_id = models.ForeignKey(Users , on_delete = models.CASCADE)
+    value = models.IntegerField(default=1,validators=[MaxValueValidator(100), MinValueValidator(1)])
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     
 
 
 class Donation(models.Model):
-    donation_amount = models.FloatField()
+    donation_amount = models.IntegerField()
     project_id = models.ForeignKey(Project , on_delete = models.CASCADE)
-    user_id = models.ForeignKey(Users , on_delete = models.CASCADE)
+    user_id = models.ForeignKey(Users, on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
-class ProjectTag(models.Model):
-    project_id = models.ForeignKey(Project , on_delete = models.CASCADE)
-    tag_id = models.ForeignKey(Tags , on_delete = models.CASCADE)
+class ProjectPicture(models.Model):
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE, default=None, related_name='imgs')   
+    img_url = models.ImageField(upload_to='static/projects/images/', verbose_name='Image')
+
+   
+    def __str__(self):
+        return str(self.Project.title)
+
 
 class Comments(models.Model):
-    comment_body = models.CharField(max_length=500)
-    project_id = models.ForeignKey(Project , on_delete = models.CASCADE)
-    user_id = models.ForeignKey(Users , on_delete = models.CASCADE)
+    
+    content = models.TextField(max_length=3000, blank=False,default="some string")
+    project_id = models.ForeignKey("Project", on_delete=models.CASCADE)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
+    
 
 class CommentReply(models.Model):
     reply_body = models.CharField(max_length=500)
     comment_id = models.ForeignKey(Comments , on_delete = models.CASCADE)
     user_id = models.ForeignKey(Users , on_delete = models.CASCADE)
 
+
+class ProjectReport(models.Model):
+    content = models.TextField(max_length=3000)
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+
+
+class CommentReport(models.Model):
+    comment_id = models.ForeignKey(Comments, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
 
