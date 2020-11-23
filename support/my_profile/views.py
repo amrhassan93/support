@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
-from project.models import *
+from projects.models import Project
 from reglogin.models import Users
 
 # Create your views here.
