@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from projects.models import *
+from projects.models import User
 
 # Register your models here.
 

@@ -89,7 +89,6 @@ class CommentReport(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
-
 # 1- create db lacaly  => create database support_app
 # 2- python manage.py makemigrations 
 # 3- python3 manage.py migrate
