@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from projects.models import User
+from projects.models import Project ,Category ,Comments ,Donation,Rating,CommentReport,ProjectReport,ProjectPicture
 
 # Register your models here.
 

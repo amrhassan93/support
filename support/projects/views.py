@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import *
+from .models import Category,Project,Rating,Donation,ProjectPicture,Comments,CommentReply,ProjectReport,CommentReport
 from django.forms import modelformset_factory
 import json
 import re
@@ -22,7 +22,7 @@ from datetime import datetime
 def all_project(request):
     return render(request , 'projects/all_projects.html')
 
-# def showProject(request, id):
+def showProject(request, id):
 #     item = Project.objects.get(id=id)
 #     pPics = ProjectPicture.objects.all().filter(project_id=id)
 #     relatedProjects = Project.objects.all().filter(category_id=item.category)
