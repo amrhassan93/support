@@ -1,19 +1,45 @@
 {% extends 'home/index.html' %} {% load static %}
 
 <head>
+    <title>Login</title>
     {% block style %}
     <link rel="stylesheet" href="{% static '/css/login.css' %}"> {% endblock %}
 </head>
 
 <body>
-    {% block content %}
+    {% load crispy_forms_tags %} {% block content %}
     <div class="container pt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 card login-form">
-                {% if form.errors %}
-                <p style="color: red;">{{ form.errors }}</p>
-                {% endif %}
                 <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <h1 class="border-bottom mb-40 text-center">Login</h1>
+                        {{ form|crispy }}
+                        <!-- Error want to delete confirm pass -->
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Sign In</button>
+                    </div>
+                </form>
+                <div class="border-top-pt-3">
+                    <small class="text-muted">
+                        Need An Account? <a class="ml-2" href="signup">
+                        Sign Up</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br> {% endblock %}
+
+    <!-- <div class="container pt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 card login-form">
+                <form method="POST">
+                    {% csrf_token %}
                     <div class="form-group">
                         <h1 class="text-center">Sign in</h1>
                         <hr>
@@ -31,6 +57,5 @@
                 </form>
             </div>
         </div>
-    </div>
-    {% endblock %}
+    </div> -->
 </body>
