@@ -1,6 +1,10 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
+<<<<<<< HEAD
 from projects.models import *
+=======
+from projects.models import Project
+>>>>>>> 8ae514fc4aa0f1ea3e3f2f4ebbed4f5d917c3ffc
 from reglogin.models import Users
 
 # Create your views here.
