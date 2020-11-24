@@ -21,7 +21,7 @@
 
 <body>
     <!-- Start of NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,17 +62,45 @@
 
     {% block content %}
 
-     {% endblock %}
+    <div class="container" style="margin: 200px; ">
+        <div class="row">
+            {% for project in highest_five_rated %}
+            <!-- <div class="project" style="height: 100vh; margin-top: 100px; text-align: center;">
+        <h1>{{project.title}}</h1>
+        <h6>{{project.details}}</h6>
+        <h6>{{project.target}}</h6>
+        <h6>{{project.created_at}}</h6>
+        <h6>{{project.start_date}}</h6>
+        <h6>{{project.end_date}}</h6>
+        <h6>{{project.category_id.cat_name}}</h6>
+        <h6>{{project.user_id.first_name}}</h6>
+    </div> -->
 
-     {% block js %}
-     
-     {% endblock %}
+
+
+            <div class="col-md-4">
+                <div class="card ls1">
+                    <img class="card-img-left text-center" src="" alt="" style="background-color:red;">
+                    <div class="card-body">
+                        <h3>{{project.title}}</h3>
+                        <p></p>
+                        <br><br>
+                        <a href="#" class="btn btn-primary">{{project.details}}</a>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endblock %} {% block js %} {% endblock %}
 
 
 
-     <!-- <Start of FOOTER > -->
+    <!-- <Start of FOOTER > -->
 
-        <section id="footer" class="fixed-bottom">
+    <section id="footer">
         <div class="container">
             <div class="row">
                 <div class="col-6">
@@ -90,7 +118,7 @@
             </div>
         </div>
     </section>
-<!-- End OF NAVBAR -->
+    <!-- End OF NAVBAR -->
 </body>
 
 </html>
