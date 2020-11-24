@@ -59,7 +59,7 @@ class ProjectPicture(models.Model):
 
    
     def __str__(self):
-        return str(self.Project.title)
+        return str(Project.title)
 
 
 class Comments(models.Model):

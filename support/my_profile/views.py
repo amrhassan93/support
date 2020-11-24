@@ -1,11 +1,8 @@
-from django.shortcuts import render , redirect
-from django.http import HttpResponse
-<<<<<<< HEAD
-from projects.models import *
-=======
-from projects.models import Project
->>>>>>> 8ae514fc4aa0f1ea3e3f2f4ebbed4f5d917c3ffc
-from reglogin.models import Users
+from django.shortcuts import render, redirect,
+from django.http import HttpResponse,
+from projects.models import Donation, Projects,
+from reglogin.models import Users,
+from django.contrib.auth.models import User
 
 # Create your views here.
 def view_profile(request):
@@ -16,10 +13,9 @@ def edit_profile(request):
     return render(request,'edit.html')
 
 
-
 def all_project(request):
-    user = Users.objects.get(id=request.session['id'])
-    all_project = Project.objects.all().filter(user_id = user)
+    user = User.objects.get(id=request.session['id'])
+    all_project = Projects.objects.all().filter(user_id = user)
     
     context = {
       'all_project' : all_project,
@@ -31,10 +27,9 @@ def all_project(request):
         return  redirect('/login')
 
 
-
 def all_donation(request):
-    user =User.objects.get(id=request.session['id'])
-    all_donation =Donation.objects.all().filter(user_id = user)
+    user = User.objects.get(id=request.session['id'])
+    all_donation = Donation.objects.all().filter(user_id = user)
     
     context = {
       'all_donation' : all_donation,
