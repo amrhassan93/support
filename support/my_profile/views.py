@@ -1,21 +1,13 @@
-from django.shortcuts import render, redirect,
-from django.http import HttpResponse,
-from projects.models import Donation, Projects,
-from reglogin.models import Users,
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from projects.models import Donation, Project
+from reglogin.models import Users
 from django.contrib.auth.models import User
-
-# Create your views here.
-def view_profile(request):
-    return render(request ,'profile.html')
-
-
-def edit_profile(request):
-    return render(request,'edit.html')
-
+from django.views.generic import ListView, DetailView
 
 def all_project(request):
     user = User.objects.get(id=request.session['id'])
-    all_project = Projects.objects.all().filter(user_id = user)
+    all_project = Project.objects.all().filter(user_id = user)
     
     context = {
       'all_project' : all_project,
@@ -26,15 +18,35 @@ def all_project(request):
     else:
         return  redirect('/login')
 
+class ProjectListView(ListView):
+  model = Project
+  template_name = "my_profile/all_project.html"
+  context_object_name = 'all_project'
+  ordering = ['-date-posted']
 
-def all_donation(request):
-    user = User.objects.get(id=request.session['id'])
-    all_donation = Donation.objects.all().filter(user_id = user)
+
+
+
+def detail_view(request, id):
+  details = Project.objects.get(id = id)
+  context ={
+    "details":details
+  } 
+  return render(request, "home/post_detail.html",context)
+
+
+class ProjectDetaiView(DetailView):
+  model = Project
+
+
+# def all_donation(request):
+#     user = User.objects.get(id=request.session['id'])
+#     all_donation = Donation.objects.all().filter(user_id = user)
     
-    context = {
-      'all_donation' : all_donation,
-    }
-    if 'id' in request.session:
-        return render(request, 'all_donation.html', context)
-    else:
-        return redirect('/login')
+#     context = {
+#       'all_donation' : all_donation,
+#     }
+#     if 'id' in request.session:
+#         return render(request, 'all_donation.html', context)
+#     else:
+#         return redirect('/login')

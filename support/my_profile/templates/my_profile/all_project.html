@@ -1,0 +1,29 @@
+{% extends 'home/index.html' %} 
+
+{% block table %}
+{% for project in all_project %}
+
+<tr>
+    <td>Project</td>
+</tr>
+
+<tr>
+    <td>Title</td>
+    <td>{{project.project_title}}</td>
+    <!-- <td><td>{{object.project_title}}</td></td> -->
+</tr>
+
+<tr>
+    <td>Details</td>
+    <td>{{project.details}}</td>
+    <!-- <td>{{objects.details}}</td> -->
+</tr>
+
+<tr>
+    <td>End Time</td>
+    <td>{{project.end_date}}</td>
+    <!-- <td>{{object.end_date}}</td> -->
+</tr>
+
+{% endfor %}
+{% endblock %}

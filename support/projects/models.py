@@ -57,9 +57,8 @@ class ProjectPicture(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE, default=None, related_name='imgs')   
     img_url = models.ImageField(upload_to='static/projects/images/', verbose_name='Image')
 
-   
     def __str__(self):
-        return str(Project.title)
+        return str(self.Project.title)
 
 
 class Comments(models.Model):
