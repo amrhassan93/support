@@ -7,35 +7,8 @@
 </head>
 
 <body>
-    {% load crispy_forms_tags %} {% block content %}
+    {% block content %}
     <div class="container pt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6 card login-form">
-                <form method="POST">
-                    {% csrf_token %}
-                    <fieldset class="form-group">
-                        <h1 class="border-bottom mb-40 text-center">Login</h1>
-                        {{ form|crispy }}
-                        <!-- Error want to delete confirm pass -->
-                    </fieldset>
-                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Sign In</button>
-                    </div>
-                </form>
-                <div class="border-top-pt-3">
-                    <small class="text-muted">
-                        Need An Account? <a class="ml-2" href="signup">
-                        Sign Up</a>
-                    </small>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <br> {% endblock %}
-
-    <!-- <div class="container pt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 card login-form">
                 <form method="POST">
@@ -43,19 +16,20 @@
                     <div class="form-group">
                         <h1 class="text-center">Sign in</h1>
                         <hr>
-                        <label for="Email">Email address</label>
-                        <input type="email" name="email " class="form-control " id="email1 " placeholder="Enter Your Email ">
+                        <label for="User name">email</label>
+                        <input type="text" name="email " class="form-control " id="email " placeholder="Enter Your Email ">
                         <label for="Password "> Password</label>
-                        <input type="password" name="password " class="form-control " id="Password1 " placeholder="Password ">
+                        <input type="password" name="password " class="form-control " id="Password " placeholder="Your Password ">
                     </div>
                     <div class="text-center">
                         <button type="submit " class="btn btn-primary">Login</button> <br><br>
                         <button type="submit " class="fab fa-facebook-f btn btn-primary">&nbsp; Login With Facebook</button><br>
-                        <a href=" ">Forgot your password?</a>
+                        <a href="{% url 'password_reset' %}">Forgot your password?</a>
                         <label for="signup ">Don't have an account? <a href="signup">Sign up</a> </label>
                     </div>
                 </form>
             </div>
         </div>
-    </div> -->
+    </div>
+    {% endblock %}
 </body>

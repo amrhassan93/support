@@ -128,6 +128,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+#crispy version
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Email Connection
