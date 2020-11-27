@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+import os
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,9 +49,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    'bootstrap4',
+    'django_countries',
+    'taggit'
+
 ]
 
 MIDDLEWARE = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -128,9 +141,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#crispy version
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
 # Email Connection
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -138,3 +148,15 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'moomenabdelrazik@gmail.com'
 EMAIL_HOST_PASSWORD = '28091996'
+
+
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, ('staticfiles'))
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "media"),
+]
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+TAGGIT_CASE_INSENSITIVE = True
