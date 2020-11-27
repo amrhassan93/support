@@ -25,3 +25,4 @@ toml==0.10.2
 urllib3==1.25.11
 users==1.0.dev0
 wrapt==1.12.1
+django-crispy-forms==1.10.0
