@@ -8,7 +8,14 @@
 
 <body>
     {% block content %}
-    <div class="container pt-5">
+
+    <form method='post'>
+        {% csrf_token %} {{ form }}
+        <button type='submit' class=b 'tn btn-default'>Login</button>
+    </form>
+
+
+    <!-- <div class="container pt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 card login-form">
                 <form method="POST">
@@ -30,6 +37,6 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
     {% endblock %}
 </body>

@@ -2,7 +2,7 @@ from django.shortcuts import render , redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
 from django.contrib import messages
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm , LoginForm
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -12,7 +12,32 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
-from .models import Users
+from reglogin.models import Users
+
+
+# def register(request):
+#     registered = False 
+#     if request.method == "POST":
+#          user_form = UserForm(data=request.POST) 
+#          profile_form = UserProfileInfoForm(data=request.POST) 
+#          if user_form.is_valid() and profile_form.is_valid():
+#               user = user_form.save() 
+#               user.set_password(user.password) 
+#               user.save() 
+#               profile = profile_form.save(commit=False) 
+#               profile.user = user 
+#               if 'profile_pic' in request.FILES: 
+#               profile.profile_pic = request.FILES['profile_pic'] 
+#               profile.save()
+#               registered = True
+#                else:
+#                     print(user_form.errors,profile_form.errors)
+#                      else:
+#                           user_form = UserForm()
+#                            profile_form = UserProfileInfoForm()
+#                             return render(request,'auth/register.html',context={ 'user_form':user_form, 'profile_form':profile_form, 
+
+
 
 def register(request):
     if request.method == 'POST':
@@ -21,6 +46,20 @@ def register(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
+
+            new_user = Users.objects.get(user_id = user.id)
+            new_user.mobile_number = request.POST['phone']
+            new_user.save()
+
+
+
+
+            # user_phone = request.POST.get('phone')
+            # new_user = Users.objects.get(pk = user.id)
+            # new_user.mobile_number = user_phone
+            # user.save()
+
+            
             current_site = get_current_site(request)
             email_subject = 'Activate Your Account '
             to_email = form.cleaned_data.get('email')
@@ -51,24 +90,78 @@ def activate_account(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
+
+
 def loginform(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = Users.objects.filter(email=email)
-        if not user:
-            return HttpResponse("user not exist")
-        if user and user.check_password(password):
-            if user:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('signup')
-                else:
-                    return HttpResponse("Your account was inactive.")
+    form  = LoginForm(request.POST or None)
+    context ={
+        'title':'Login',
+        'form': form,
+    }
+    if form.is_valid():
+        # print(form.cleaned_data)
+        username = form.cleaned_data.get('username')
+        row_password = form.cleaned_data.get('password')
+        user = authenticate(request, username = username, password = row_password)
+        # print(request.user.is_authenticated)
+        if user is not None:
+            if user.is_active:
+                # print(request.user.is_authenticated)
+                login(request, user)
+                return redirect('/home/')
             else:
-                messages.info(request,'Invalid Login Details Given')
-    else:
-        return render(request, 'login.html', {})
+                return HttpResponse("Your account was inactive Please Go to Your Email and activate Your account")
+        else:
+            messages.info(request,'invalid Login Details Given (Username or Password)')
+    return render(request, 'login.html',context)
+
+
+
+# def loginform(request):
+#     if request.method == 'POST':
+#         # email = request.POST.get('email')
+#         # password = request.POST.get('password')  
+#         email = 'amr_hassan522@yahoo.com'
+#         password = '123'
+
+#         user = Users.objects.filter(email=email)[0]
+#         user_email = user.email
+#         user_password = user.passowrd
+
+#         if email == user_email and  password == user_password:
+#             return redirect('/home/')
+#         else:
+#             return render(request, 'signup.html')    
+#     else:
+#         return render(request, 'login.html')
+
+ 
+
+
+    #     if email == user_email and password == user_password:
+    #         if user.is_active:
+    #             login(request, user)
+    #             return redirect('signup')
+    #         else:
+    #             return HttpResponse("Your account was inactive.")
+    #     else:
+    #         messages.info(request,'Invalid Login Details Given')
+    # else:
+    #     return render(request, 'login.html', {})
+
+    #     if not user:
+    #         return HttpResponse("user not exist")
+    #     if user and user.check_password(password):
+    #         if user:
+    #             if user.is_active:
+    #                 login(request, user)
+    #                 return redirect('signup')
+    #             else:
+    #                 return HttpResponse("Your account was inactive.")
+    #         else:
+    #             messages.info(request,'Invalid Login Details Given')
+    # else:
+    #     return render(request, 'login.html', {})
 
 # def loginform(request):
 #     if request.method == 'POST':

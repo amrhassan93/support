@@ -145,8 +145,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'supappproject@gmail.com'
-EMAIL_HOST_PASSWORD = 'support123456'
+EMAIL_HOST_USER = 'moomenabdelrazik@gmail.com'
+EMAIL_HOST_PASSWORD = 'mo@371996'
 
 
 MEDIA_URL = '/media/'
