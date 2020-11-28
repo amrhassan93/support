@@ -39,8 +39,8 @@ def view_index(request):
         # # 'user_id': user_id
         # 'projects':projects
 
-def search(request , keyword):
-    search_result =get_object_or_404(Project ,title = keyword)
-    #  Project.objects.get(title = keyword)
+def search(request):
+    keyword = request.GET.get('keyword')
+    # search_result =get_object_or_404(Project ,title__contains = keyword)
+    search_result = Project.objects.filter(title__contains = keyword)
     return render(request , 'home/search.html' ,{"search_result" : search_result})
-    

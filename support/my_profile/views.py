@@ -3,39 +3,46 @@ from django.http import HttpResponse
 from projects.models import Project
 from reglogin.models import Users
 
+
 # Create your views here.
-def view_profile(request):
-    return render(request ,'profile.html')
-
-
-def edit_profile(request):
-    return render(request,'edit.html')
-
-
-
-def all_project(request):
-    user = Users.objects.get(id=request.session['id'])
-    all_project = Project.objects.all().filter(user_id = user)
-    
+def view_profile(request ,id):
+    user_profile = Users.objects.get(id = id)
+    user_projects = Project.objects.filter(user_id = id)
     context = {
-      'all_project' : all_project,
+        'user' : user_profile,
+        'user_projects':user_projects
     }
-    # return HttpResponse(all_project.project_title)
-    if 'id' in request.session:
-        return render(request,'all_project.html',context)
+    return render(request ,'profile.html' , context)
+
+
+def edit_profile(request , id):
+    if request.method == 'POST':
+        user_profile = Users.objects.get(id = id)
+        user_profile.first_name = request.POST['first_name']
+        user_profile.last_name = request.POST['last_name']
+        user_profile.mobile_number = request.POST['mobile_number']
+        user_profile.birth_date = request.POST['birth_date']
+        user_profile.country = request.POST['country']
+        user_profile.facebook_profile = request.POST['facebook_profile']
+        user_profile.save()
+        
+
+        user_profile = Users.objects.get(id = id)
+        context = {
+            'user' : user_profile
+        }
+
+        return render(request,'profile.html' , context) 
+
     else:
-        return  redirect('/login')
+        user_profile = Users.objects.get(id = id)
+        context = {
+            'user' : user_profile
+        }
+        return render(request,'edit.html' , context)
 
 
-
-def all_donation(request):
-    user =User.objects.get(id=request.session['id'])
-    all_donation =Donation.objects.all().filter(user_id = user)
-    
-    context = {
-      'all_donation' : all_donation,
-    }
-    if 'id' in request.session:
-        return render(request, 'all_donation.html', context)
-    else:
-        return redirect('/login')
+def delete_profile(request , id):
+    del_user = Users.objects.get(id = id)
+    del_user.delete()
+    return redirect('/home/')

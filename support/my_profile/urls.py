@@ -1,9 +1,11 @@
 from django.contrib import admin
 from django.urls import path
-from my_profile.views import view_profile,edit_profile
- 
+from my_profile.views import view_profile , edit_profile , delete_profile
+
 urlpatterns = [
-    path('' ,view_profile),
-    path('edit.html',edit_profile),
-    
+    path('<id>' ,view_profile , name='profile'),
+    path('edit/<id>' ,edit_profile , name='edit'),
+    path('delete/<id>' ,delete_profile , name='delete'),
+
+    # path('edit.html',edit_profile)
 ]
