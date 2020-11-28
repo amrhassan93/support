@@ -15,29 +15,6 @@ from django.template.loader import render_to_string
 from reglogin.models import Users
 
 
-# def register(request):
-#     registered = False 
-#     if request.method == "POST":
-#          user_form = UserForm(data=request.POST) 
-#          profile_form = UserProfileInfoForm(data=request.POST) 
-#          if user_form.is_valid() and profile_form.is_valid():
-#               user = user_form.save() 
-#               user.set_password(user.password) 
-#               user.save() 
-#               profile = profile_form.save(commit=False) 
-#               profile.user = user 
-#               if 'profile_pic' in request.FILES: 
-#               profile.profile_pic = request.FILES['profile_pic'] 
-#               profile.save()
-#               registered = True
-#                else:
-#                     print(user_form.errors,profile_form.errors)
-#                      else:
-#                           user_form = UserForm()
-#                            profile_form = UserProfileInfoForm()
-#                             return render(request,'auth/register.html',context={ 'user_form':user_form, 'profile_form':profile_form, 
-
-
 
 def register(request):
     if request.method == 'POST':
@@ -46,20 +23,9 @@ def register(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-
             new_user = Users.objects.get(user_id = user.id)
             new_user.mobile_number = request.POST['phone']
             new_user.save()
-
-
-
-
-            # user_phone = request.POST.get('phone')
-            # new_user = Users.objects.get(pk = user.id)
-            # new_user.mobile_number = user_phone
-            # user.save()
-
-            
             current_site = get_current_site(request)
             email_subject = 'Activate Your Account '
             to_email = form.cleaned_data.get('email')
