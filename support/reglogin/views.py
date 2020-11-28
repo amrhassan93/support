@@ -2,7 +2,7 @@ from django.shortcuts import render , redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
 from django.contrib import messages
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm,LoginForm
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -52,38 +52,27 @@ def activate_account(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 def loginform(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = Users.objects.filter(email=email)
-        if not user:
-            return HttpResponse("user not exist")
-        if user and user.check_password(password):
-            if user:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('signup')
-                else:
-                    return HttpResponse("Your account was inactive.")
+    form  = LoginForm(request.POST or None)
+    context ={
+        'title':'Login',
+        'form': form,
+    }
+    if form.is_valid():
+        # print(form.cleaned_data)
+        username = form.cleaned_data.get('username')
+        row_password = form.cleaned_data.get('password')
+        user = authenticate(request, username = username, password = row_password)
+        # print(request.user.is_authenticated)
+        if user is not None:
+            if user.is_active:
+                # print(request.user.is_authenticated)
+                login(request, user)
+                return redirect('/home/')
             else:
-                messages.info(request,'Invalid Login Details Given')
-    else:
-        return render(request, 'login.html', {})
-
-# def loginform(request):
-#     if request.method == 'POST':
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         userlogin = authenticate(request, email=email, password=password)
-#         if userlogin:
-#             # if userlogin.is_active:
-#             login(request, userlogin)
-#             return redirect('signup')
-#         else:
-#             messages.info(request,'Invalid Login Details Given')
-
-#     return render(request, 'login.html', {})
-
+                return HttpResponse("Your account was inactive Please Go to Your Email and activate Your account")
+        else:
+            messages.info(request,'invalid Login Details Given (Username or Password)')
+    return render(request, 'login.html',context)
 
 def logoutform(request):
     logout(request)
