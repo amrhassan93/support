@@ -117,6 +117,8 @@ ubuntu-drivers-common==0.0.0
 ufw==0.36
 urllib3==1.25.11
 users==1.0.dev0
+wrapt==1.12.1
+django-crispy-forms==1.10.0
 vatnumber==1.2
 vobject==0.9.6.1
 Werkzeug==0.14.1
