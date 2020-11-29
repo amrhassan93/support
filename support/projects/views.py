@@ -12,6 +12,9 @@ from decimal import Decimal, ROUND_HALF_UP
 from django.template.loader import render_to_string
 from datetime import datetime
 from reglogin.models import Users
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
@@ -48,7 +51,7 @@ def showProject(request, id):
    
     return render(request, "projects/view_project.html", context)
 
-
+@login_required()
 def create(request):
 
     ImageFormSet = modelformset_factory(
@@ -95,7 +98,7 @@ def create(request):
 #     }
 #     return render(request, 'projects/create.html', context)
 
-
+@login_required()
 def delete_project(request, pk):
 
     project = Project.objects.get(id=pk)
@@ -107,7 +110,7 @@ def delete_comment(request,comment_id,project_id):
     return redirect(f'/projects/projectDetails/{project_id}')
 
 
-
+@login_required()
 def edit_comment(request, comment_id, project_id):
     project = Project.objects.filter(pk=project_id)[0]
     comment = Comments.objects.filter(id=comment_id)[0]
@@ -115,13 +118,16 @@ def edit_comment(request, comment_id, project_id):
     'project': project}
     return render(request, 'editcomment.html',context)
 
+@login_required()
 def update_comment(request, comment_id, project_id):
     content = request.POST['content']
     Comments.objects.filter(pk=comment_id).update(content=content)
     return redirect(f'/projects/projectDetails/{project_id}')
-
+@login_required()
 def report_comment(request, comment_id, project_id):
-    user1 = Users.objects.filter(id=1)[0]
+    user_id = request.user
+    user_test = Users.objects.get(user_id = user_id)
+    user1 = Users.objects.filter(id=user_test.id)[0]
     comment1=Comments.objects.filter(pk=comment_id)[0]
 
     report_comment =CommentReport (
@@ -132,28 +138,34 @@ def report_comment(request, comment_id, project_id):
 
 
 
-
+@login_required()
 def report_project(request, project_id):
-    user1 = Users.objects.filter(id=1)[0]
+    user_id = request.user
+    user_test = Users.objects.get(user_id = user_id)
+    user1 = Users.objects.filter(id=user_test.id)[0]
     Project1=Project.objects.filter(pk=project_id)[0]
     report_project = ProjectReport(
         user_id=user1,
         project_id=Project1)
     report_project.save()
     return redirect(f'/projects/projectDetails/{project_id}')
-
+@login_required()
 def donate(request,id):
-
-    user1 = Users.objects.filter(id=1)[0]
-    p1=Project.objects.filter(id=id)[0]
-    if request.method == 'POST':
-        donate = Donation.objects.create(
-            donation_amount=request.POST['donate'],
-            project_id=p1,
-            user_id=user1
-        )
-        return redirect(f'/projects/projectDetails/{id}')
-
+    # user_id=request.user.id
+    if request.user.is_authenticated: 
+        user_id = request.user
+        user_test = Users.objects.get(user_id = user_id) 
+        user1 = Users.objects.filter(id=user_test.id)[0]
+        p1=Project.objects.filter(id=id)[0]
+        if request.method == 'POST':
+            donate = Donation.objects.create(
+                donation_amount=request.POST['donate'],
+                project_id=p1,
+                user_id=user1
+            )
+            return redirect(f'/projects/projectDetails/{id}')
+    else:
+        return redirect(f'/projects/projectDetails/4')
 
 
 def show_tag(request, slug):
@@ -184,10 +196,11 @@ def list_categories(request):
 
 
 
-
+@login_required()
 def create_comment(request,id):
-
-    user1 = Users.objects.filter(id=1)[0]
+    user_id = request.user
+    user_test = Users.objects.get(user_id = user_id)
+    user1 = Users.objects.filter(id=user_test.id)[0]
     p1=Project.objects.filter(id=id)[0]
     comment = Comments()
     comment.content = request.POST['content']

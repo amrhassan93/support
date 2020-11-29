@@ -17,7 +17,7 @@ def view_home(request):
         'featured_projects': featured_projects
         }
 
-    return render(request,'home/index.html',context)
+    return render(request,'home/home.html',context)
 
 
 def view_index(request):
