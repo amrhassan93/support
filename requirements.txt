@@ -29,6 +29,9 @@ sqlparse==0.4.1
 toml==0.10.2
 urllib3==1.25.11
 users==1.0.dev0
+vatnumber==1.2
+vobject==0.9.6.1
+Werkzeug==0.14.1
 wrapt==1.12.1
 bootstrap4==0.1.0
 crispy-forms-semantic-ui==0.2.0
@@ -44,4 +47,3 @@ pylint-django==2.0.14
 pylint-plugin-utils==0.6
 swapper==1.1.2.post1
 typed-ast==1.4.1
-django-star-ratings

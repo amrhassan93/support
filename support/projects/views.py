@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import *
+from .models import Category,Project,Rating,Donation,ProjectPicture,Comments,CommentReply,ProjectReport,CommentReport
 from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProjectsForm, ImageForm

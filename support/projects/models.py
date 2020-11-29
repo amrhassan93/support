@@ -1,4 +1,3 @@
-
 from __future__ import unicode_literals
 from django.utils import timezone
 from django.db import models
@@ -87,7 +86,6 @@ class ProjectReport(models.Model):
 class CommentReport(models.Model):
     comment_id = models.ForeignKey(Comments, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-
 
 
 # 1- create db lacaly  => create database support_app

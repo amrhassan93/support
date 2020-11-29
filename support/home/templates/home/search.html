@@ -1,0 +1,19 @@
+{% extends 'home/index.html' %} {% block content %} {% for project in search_result %}
+<div class="test" style="height:100vh; text-align: center; padding-top: 150px;">
+    <h1>{{project.title}}</h1>
+    <h6>{{project.details}}</h6>
+    <h6>{{project.target}}</h6>
+    <h6>{{project.created_at}}</h6>
+    <h6>{{project.start_date}}</h6>
+    <h6>{{project.end_date}}</h6>
+    <h6>{{project.category_id.cat_name}}</h6>
+    <h6>{{project.user_id.first_name}}</h6>
+    <h6>
+        {% for tag in pData.tags.all%}
+        <li class="list-group-item">
+            <a href="{% url 'show_tag' tag.name %}">{{tag.name}}</a>
+        </li>
+        {% endfor%}
+    </h6>
+</div>
+{% endfor %} {% endblock %}

@@ -27,11 +27,27 @@ from django.conf.urls import url
 urlpatterns = staticfiles_urlpatterns()
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+from reglogin.views import logoutform 
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/' , include('home.urls')) , 
     path('reglogin/' , include('reglogin.urls')),
+    path('logout/', logoutform, name='logout'),
+
+    path('password-reset/', auth_views.PasswordResetView.as_view
+    (template_name='password_reset.html'),name='password_reset'),
+     
+    path('password-reset/done/', auth_views.PasswordResetDoneView.as_view
+    (template_name='password_reset_done.html'),name='password_reset_done'),
+
+     path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view
+    (template_name='password_reset_confirm.html'),name='password_reset_confirm'),
+
+     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view
+    (template_name='password_reset_complete.html'),name='password_reset_complete'),
+    
     path('projects/' ,include('projects.urls')),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
     path('profile/',include('my_profile.urls')),
