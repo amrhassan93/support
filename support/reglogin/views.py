@@ -14,8 +14,6 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from reglogin.models import Users
 
-
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -65,14 +63,11 @@ def loginform(request):
         'form': form,
     }
     if form.is_valid():
-        # print(form.cleaned_data)
         username = form.cleaned_data.get('username')
         row_password = form.cleaned_data.get('password')
         user = authenticate(request, username = username, password = row_password)
-        # print(request.user.is_authenticated)
         if user is not None:
             if user.is_active:
-                # print(request.user.is_authenticated)
                 login(request, user)
                 return redirect('/home/')
             else:
@@ -80,69 +75,6 @@ def loginform(request):
         else:
             messages.info(request,'invalid Login Details Given (Username or Password)')
     return render(request, 'login.html',context)
-
-
-
-# def loginform(request):
-#     if request.method == 'POST':
-#         # email = request.POST.get('email')
-#         # password = request.POST.get('password')  
-#         email = 'amr_hassan522@yahoo.com'
-#         password = '123'
-
-#         user = Users.objects.filter(email=email)[0]
-#         user_email = user.email
-#         user_password = user.passowrd
-
-#         if email == user_email and  password == user_password:
-#             return redirect('/home/')
-#         else:
-#             return render(request, 'signup.html')    
-#     else:
-#         return render(request, 'login.html')
-
- 
-
-
-    #     if email == user_email and password == user_password:
-    #         if user.is_active:
-    #             login(request, user)
-    #             return redirect('signup')
-    #         else:
-    #             return HttpResponse("Your account was inactive.")
-    #     else:
-    #         messages.info(request,'Invalid Login Details Given')
-    # else:
-    #     return render(request, 'login.html', {})
-
-    #     if not user:
-    #         return HttpResponse("user not exist")
-    #     if user and user.check_password(password):
-    #         if user:
-    #             if user.is_active:
-    #                 login(request, user)
-    #                 return redirect('signup')
-    #             else:
-    #                 return HttpResponse("Your account was inactive.")
-    #         else:
-    #             messages.info(request,'Invalid Login Details Given')
-    # else:
-    #     return render(request, 'login.html', {})
-
-# def loginform(request):
-#     if request.method == 'POST':
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         userlogin = authenticate(request, email=email, password=password)
-#         if userlogin:
-#             # if userlogin.is_active:
-#             login(request, userlogin)
-#             return redirect('signup')
-#         else:
-#             messages.info(request,'Invalid Login Details Given')
-
-#     return render(request, 'login.html', {})
-
 
 def logoutform(request):
     logout(request)

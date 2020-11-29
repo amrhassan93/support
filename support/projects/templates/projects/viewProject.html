@@ -1,0 +1,100 @@
+{% extends 'home/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- <% block style %>
+<link rel="stylesheet" type="text/css" href="{% static 'css/comments.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/styleP.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/viewCat.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+<% endblock %> -->
+
+{% block title %}
+{{ pData.title }}
+{% endblock %}
+
+{% block content %}
+<h5 class="font-weight-bold text-dark"> comments : </h5></br>
+    <div class=" rounded bg-light">
+      {% for comment in pData.comments_set.all %}
+        {% if report_comment_ids and comment.id in report_comment_ids %}
+
+        {% else %}
+          <div class="p-3 mb-2 bg-dark text-white rounded">
+              <!-- <span
+                  class="font-weight-bold text-primary"> {{ comment.user.first_name }} {{ comment.user.last_name }} :</span> -->
+            <span>{{ comment.content }}</span>
+            <div class="float-right">
+              <!-- {% if comment.user.id == request.user.id %} -->
+                <a href="{% url 'projects:deleteComment' comment.project.id comment.id %}">
+                  <i class="fa fa-trash fa-lg " aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'projects:editComment' comment.project.id comment.id %}">
+                  <i class="fa fa-edit fa-lg " aria-hidden="true"></i>
+                </a>
+              {% else %}
+                <a href="{% url 'projects:reportComment' comment.project.id comment.id %}">
+                  <i class="fa fa-ban text-danger fa-lg "></i>
+                </a>
+              {% endif %}
+            </div>
+
+
+            <br/>
+
+            {% for reply in comment.reply_set.all %}
+              {% if report_reply_ids and reply.id in report_reply_ids %}
+
+              {% else %}
+                <p style="margin-left:5%">
+              <span class="font-weight-bold text-primary">
+                  {{ reply.user.first_name }} {{ reply.user.last_name }} :
+              </span>
+                  <span>{{ reply.body }}</span>
+                  <!-- <div class="float-right"> -->
+                  {% if reply.user.id == request.user.id %}
+                    <a href="{% url 'projects:deleteReply'  reply.comment.project.id reply.comment.id reply.id %}">
+                      <i class="fa fa-trash fa-lg " aria-hidden="true"></i>
+                    </a>
+                    <a href="{% url 'projects:editReply'  reply.comment.project.id reply.comment.id reply.id %}">
+                      <i class="fa fa-edit fa-lg " aria-hidden="true"></i>
+                    </a>
+                  {% else %}
+                    <a href="{% url 'projects:reportReply' reply.comment.project.id reply.comment.id reply.id %}">
+                      <i class="fa fa-ban text-danger fa-lg "></i>
+                    </a>
+                  {% endif %}
+                  <!-- </div> -->
+                </p>
+              {% endif %}
+
+            {% endfor %}
+            {% if request.user.is_authenticated %}
+              <a style="margin-left:5%;margin-bottom:2% " class="btn btn-primary" role="button"
+                 href="{% url 'projects:newReply' comment.project.id comment.id %}">Add Reply</a><br/>
+            {% endif %}
+
+          </div>
+
+        {% endif %}
+      {% endfor %}
+
+
+      {% if request.user.is_authenticated %}
+        <div class="form-group col-xs-6">
+          <form class="form-group" action="{% url 'projects:addComment' project.id %}" method="post">
+            {% csrf_token %}
+
+            <input class="form-control input-md" placeholder="Add Comment ..." type="text" name="body"/>
+            <input class="btn btn-primary" type="submit" value="Add" name="submit"/>
+          </form>
+        </div>
+      {% endif %}
+    </div>
+
+
+  {% endif %}
+
+{% endblock %}

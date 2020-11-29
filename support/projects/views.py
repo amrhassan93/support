@@ -1,60 +1,53 @@
 from django.shortcuts import render
 from .models import Category,Project,Rating,Donation,ProjectPicture,Comments,CommentReply,ProjectReport,CommentReport
 from django.forms import modelformset_factory
-import json
-import re
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProjectsForm, ImageForm
-from django.http.response import HttpResponse, JsonResponse,HttpResponseForbidden
+from django.http.response import HttpResponse,JsonResponse,HttpResponseForbidden
 from django.forms import modelformset_factory
-from django.views.decorators.cache import cache_control
 from django.contrib import messages
 from django.db.models import Q, Avg, Sum
-# Create your views here.
 from taggit.models import Tag
 from decimal import Decimal, ROUND_HALF_UP
 from django.template.loader import render_to_string
 from datetime import datetime
+from reglogin.models import Users
 
 
 # Create your views here.
 
 def all_project(request):
-    return render(request , 'projects/all_projects.html')
+    projects = Project.objects.all()
+    context = {
+        'projects' : projects
+    }
+    return render(request , 'projects/all_projects.html' , context)
 
 def showProject(request, id):
-#     item = Project.objects.get(id=id)
-#     pPics = ProjectPicture.objects.all().filter(project_id=id)
-#     relatedProjects = Project.objects.all().filter(category_id=item.category)
-#     rate = item.rate_set.all().aggregate(Avg("value"))["value__avg"]
-#     rate = rate if rate else 0
-#     rate = Decimal(rate).quantize(0, ROUND_HALF_UP)
-#     today = datetime.now()
-#     start_date = item.start_date
-#     end_date = item.end_date
-#     myFormat = "%Y-%m-%d %H:%M:%S"
-#     today = today.strftime(myFormat)
-#     today = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
-#     start_date = start_date.strftime(myFormat)
-#     start_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
-#     end_date = end_date.strftime(myFormat)
-#     end_date = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S")
-#     donate = item.donation_set.all().aggregate(Sum("amount"))
-#     context = {'pData': item,
-#                'pPics': pPics,
-#                'rate': rate,
-#                'today': today,
-#                'start_date': start_date,
-#                'end_date': end_date,
-#                'relatedProjs': relatedProjects,
-#                'donations_amount': donate["amount__sum"] if donate["amount__sum"] else 0}
+    item = Project.objects.get(id=id)
+    pPics = ProjectPicture.objects.filter(project_id=id)
+    relatedProjects = Project.objects.all().filter(category_id=item.category_id)
+    today = datetime.now()
+    start_date = item.start_date
+    end_date = item.end_date
+    myFormat = "%Y-%m-%d %H:%M:%S"
+    today = today.strftime(myFormat)
+    today = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+    start_date = start_date.strftime(myFormat)
+    start_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+    end_date = end_date.strftime(myFormat)
+    end_date = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S")
+    donate = item.donation_set.all().aggregate(Sum("donation_amount"))
+    context = {'pData': item,
+               'pPics': pPics,
+               'today': today,
+               'start_date': start_date,
+               'end_date': end_date,
+               'relatedProjs': relatedProjects,
+               'donations_amount': donate["donation_amount__sum"] if donate["donation_amount__sum"] else 0}
+   
+    return render(request, "projects/view_project.html", context)
 
-#     if request.user:
-#         user_rate = item.rate_set.filter(
-#             user_id=request.user.profile.id).first()
-#         if user_rate:
-#             context["user_rate"] = user_rate.value
-    return render(request, "projects/view_Project.html", context)
 
 def create(request):
 
@@ -68,13 +61,12 @@ def create(request):
 
         if form.is_valid() and formset.is_valid():
             new_form = form.save(commit=False)
-            # new_form.user = Profile.objects.get(user=request.user)
             new_form.save()
             form.save_m2m()
             for form in formset.cleaned_data:
                 if form:
                     image = form['img_url']
-                    photo = ProjectPicture(Project=new_form, img_url=image)
+                    photo = ProjectPicture(project_id=new_form, img_url=image)
                     photo.save()
             return redirect(f'/projects/projectDetails/{new_form.id}')
         context = {
@@ -91,6 +83,121 @@ def create(request):
             'formset': formset,
         }
     return render(request, 'projects/create.html', context)
+
+
+# def warn(request, pk):
+#     context = {
+#         'cancel': 'projectDetails',
+#         'delete': 'project_delete',
+#         'msg': 'Are you sure you want to delete this project ? All it\'s donations, comments will be deleted',
+#         'cancel_id': pk,
+#         'delete_id': pk,
+#     }
+#     return render(request, 'projects/create.html', context)
+
+
+def delete_project(request, pk):
+
+    project = Project.objects.get(id=pk)
+    project.delete()
+    return render(request,'projects/all_projects.html' )
+
+def delete_comment(request,comment_id,project_id):
+    Comments.objects.get(id=comment_id).delete()
+    return redirect(f'/projects/projectDetails/{project_id}')
+
+
+
+def edit_comment(request, comment_id, project_id):
+    project = Project.objects.filter(pk=project_id)[0]
+    comment = Comments.objects.filter(id=comment_id)[0]
+    context= { 'comment': comment,
+    'project': project}
+    return render(request, 'editcomment.html',context)
+
+def update_comment(request, comment_id, project_id):
+    content = request.POST['content']
+    Comments.objects.filter(pk=comment_id).update(content=content)
+    return redirect(f'/projects/projectDetails/{project_id}')
+
+def report_comment(request, comment_id, project_id):
+    user1 = Users.objects.filter(id=1)[0]
+    comment1=Comments.objects.filter(pk=comment_id)[0]
+
+    report_comment =CommentReport (
+        user_id=user1,
+        comment_id=comment1)
+    report_comment.save()
+    return redirect(f'/projects/projectDetails/{project_id}')
+
+
+
+
+def report_project(request, project_id):
+    user1 = Users.objects.filter(id=1)[0]
+    Project1=Project.objects.filter(pk=project_id)[0]
+    report_project = ProjectReport(
+        user_id=user1,
+        project_id=Project1)
+    report_project.save()
+    return redirect(f'/projects/projectDetails/{project_id}')
+
+def donate(request,id):
+
+    user1 = Users.objects.filter(id=1)[0]
+    p1=Project.objects.filter(id=id)[0]
+    if request.method == 'POST':
+        donate = Donation.objects.create(
+            donation_amount=request.POST['donate'],
+            project_id=p1,
+            user_id=user1
+        )
+        return redirect(f'/projects/projectDetails/{id}')
+
+
+
+def show_tag(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+
+    projects = Project.objects.filter(tags=tag)
+    context = {
+        'tag': tag,
+        'projects': projects,
+    }
+    return render(request, 'projects/tag.html', context)
+
+
+
+def showCategoryProjects(request, id):
+    cate = Category.objects.get(id=id)
+    context = {'catname': cate}
+    return render(request, "projects/viewCategory.html", context)
+
+
+def list_categories(request):
+
+     cates = Category.objects.all()
+     return {
+        'categs': cates
+      }
+
+
+
+
+
+def create_comment(request,id):
+
+    user1 = Users.objects.filter(id=1)[0]
+    p1=Project.objects.filter(id=id)[0]
+    comment = Comments()
+    comment.content = request.POST['content']
+    comment.project_id = p1
+    comment.user_id = user1
+    comment.save()
+    return redirect(f'/projects/projectDetails/{id}')
+
+
+
 
 
 
