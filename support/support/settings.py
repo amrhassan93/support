@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'django_countries',
-    'taggit'
+    'taggit',
+    'star_ratings'
 
 ]
 
@@ -139,6 +140,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Email Connection
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -150,6 +152,10 @@ EMAIL_HOST_PASSWORD = 'mo@371996'
 
 MEDIA_URL = '/media/'
 
+
+
+
+
 STATIC_ROOT = os.path.join(BASE_DIR, ('staticfiles'))
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "media"),
@@ -158,3 +164,5 @@ STATICFILES_DIRS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 TAGGIT_CASE_INSENSITIVE = True
+# STAR_RATINGS_RATING_MODEL = 'projects.Rating'
+
