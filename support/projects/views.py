@@ -88,15 +88,6 @@ def create(request):
     return render(request, 'projects/create.html', context)
 
 
-# def warn(request, pk):
-#     context = {
-#         'cancel': 'projectDetails',
-#         'delete': 'project_delete',
-#         'msg': 'Are you sure you want to delete this project ? All it\'s donations, comments will be deleted',
-#         'cancel_id': pk,
-#         'delete_id': pk,
-#     }
-#     return render(request, 'projects/create.html', context)
 
 @login_required()
 def delete_project(request, pk):
@@ -105,6 +96,7 @@ def delete_project(request, pk):
     project.delete()
     return render(request,'projects/all_projects.html' )
 
+@login_required()
 def delete_comment(request,comment_id,project_id):
     Comments.objects.get(id=comment_id).delete()
     return redirect(f'/projects/projectDetails/{project_id}')
@@ -151,7 +143,6 @@ def report_project(request, project_id):
     return redirect(f'/projects/projectDetails/{project_id}')
 @login_required()
 def donate(request,id):
-    # user_id=request.user.id
     if request.user.is_authenticated: 
         user_id = request.user
         user_test = Users.objects.get(user_id = user_id) 

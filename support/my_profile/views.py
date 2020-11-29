@@ -34,13 +34,7 @@ def edit_profile(request , id):
         auth_user.save()
         
 
-        # user_profile = Users.objects.get(id = id)
-        # auth_user = User.objects.get(id = user_profile.user_id)
-
-        # context = {
-        #     'user_profile' : user_profile,
-        #     'auth_user':auth_user
-        # }
+       
 
         return redirect(f'/profile/{id}') 
 

@@ -121,7 +121,7 @@
                         </div>
                         <div class="col-lg-8 col-md-12 col-sm-12">
                             <div class="blog-title mb-3">
-                                <h3><a href="project">{{project.title}}</a></h3>
+                                <h3><a href="{% url 'show_project' project.id%}">{{project.title}}</a></h3>
                                 TOTAL TARGET: <span style="color:dimgrey;">{{project.target}}</span>$
                             </div>
                             <div class="blog-date mb-2">

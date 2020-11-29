@@ -1,16 +1,14 @@
-{% extends "home/index.html" %}
-
-{% block content %}
+{% extends "home/index.html" %} {% block content %}
 
 
 <form action="{% url 'updateComment'  comment.id project.id %}" method="post">
-                {% csrf_token %}
-                <span class="font-weight-bold text-primary" > 
+    {% csrf_token %}
+    <span class="font-weight-bold text-primary"> 
                        </span>
-                       <!-- {{comment.content}} -->
-            <input type="text" class="form-control input-lg" value="{{comment.content}}" name="content" />
-            <input type="submit" class="btn btn-primary" value="Edit" name="submit" />
-        </form>
+    <!-- {{comment.content}} -->
+    <input type="text" class="form-control input-lg" value="{{comment.content}}" name="content" />
+    <input type="submit" class="btn btn-primary" value="Edit" name="submit" />
+</form>
 
 
 
@@ -18,28 +16,8 @@
 
 
 
-<!-- <div class="container">
-      
-        <h5 class="font-weight-bold text-dark" > comments : </h5></br>
-<div class="jumbotron rounded bg-light">
-        {% for comment in project.Comments_set.all %} -->
-       
-           <!-- {% if comment_id == comment.id %}  -->
-           <!-- comment.project.id comment.id -->
-           <!-- <form action="{% url 'updateComment'  comment.id project.id %}" method="post">
-                {% csrf_token %} -->
-                <!-- <span class="font-weight-bold text-primary" > 
-                       </span> -->
-                       <!-- {{comment.content}} -->
-            <!-- <input type="text" class="form-control input-lg" value="{{comment.content}}" name="content" />
-            <input type="submit" class="btn btn-primary" value="Edit" name="submit" />
-        </form> -->
-          
-        <!-- {% endif %}    -->
-
-         <!-- {% endfor %} -->
 
 </div>
-   
+
 </div>
 {% endblock %}

@@ -7,5 +7,4 @@ urlpatterns = [
     path('edit/<id>' ,edit_profile , name='edit'),
     path('delete/<id>' ,delete_profile , name='delete'),
 
-    # path('edit.html',edit_profile)
 ]

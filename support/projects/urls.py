@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     path('' , views.all_project , name='projects'),
     path('create/', views.create),
-    path('projectDetails/<int:id>',views.showProject),
+    path('projectDetails/<int:id>',views.showProject, name="show_project"),
     path('deleteComment/<int:comment_id>/<int:project_id>', views.delete_comment, name="deleteComment"),
     path('editComment/<int:comment_id>/<int:project_id>', views.edit_comment, name="editComment"),
     path('updateComment/<int:comment_id>/<int:project_id>', views.update_comment, name="updateComment"),
@@ -19,10 +19,4 @@ urlpatterns = [
 
 
 
-    # path('<int:project_id>/comments/<int:comment_id>/addReply', views.add_reply, name="addReply"),
-    # path('showCategory/<int:id>',views.showCategoryProjects ,name="show_cate"),
-    # path('/report_com', views.report_comment, name = 'report_comment'),
-    # path('<int:id>/rate/<int:value>', views.rate_project, name='rate_project'),
-    # path('warn/<int:pk>', views.warn, name='warn'),
-   
     ]

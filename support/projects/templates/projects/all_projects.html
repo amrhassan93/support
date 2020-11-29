@@ -1,58 +1,49 @@
-{% extends 'home/index.html' %} 
-{% load static %}
-{% block style %}
+{% extends 'home/index.html' %} {% load static %} {% block style %}
 
-<link rel="stylesheet" href="{% static 'projects/css/style.css' %}"> 
-   
-{% endblock %}
-
-   
-{% block content %}
+<link rel="stylesheet" href="{% static 'projects/css/style.css' %}"> {% endblock %} {% block content %}
 
 
 <div class="container">
-<!-- {% for project in projects %}
-    <h1>{{project.title}}</h1>
-{% endfor %} -->
 
-<div class="projects">
-    {% for project in projects %}
-    <div class="project">
 
-        <div class="row main-row p-2">
-            <div class="col-lg-4 col-md-12 col-sm-12">
-                <div class="blog-img">
-                    <img src="{% static 'projects/images/p4.png' %}" alt="" class="img-fluid">
+    <div class="projects">
+        {% for project in projects %}
+        <div class="project">
 
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 mb-2">
-                        <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item"> <i class="fas fa-comment" aria-hidden="true" style="font-size:20px;color:dimgrey"> 1</i></li>
-                        </ul>
+            <div class="row main-row p-2">
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="blog-img">
+                        <img src="{% static 'projects/images/p4.png' %}" alt="" class="img-fluid">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 mb-2">
+                            <ul class="list-group list-group-horizontal">
+                                <li class="list-group-item"> <i class="fas fa-comment" aria-hidden="true" style="font-size:20px;color:dimgrey"> 1</i></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    <div class="blog-title mb-3">
+                        <h3><a href="{% url 'show_project' project.id%}">{{project.title}}</a></h3>
+                        TOTAL TARGET: <span style="color:dimgrey;">{{project.target}}</span>$
+                    </div>
+                    <div class="blog-date mb-2">
+                        CREATED : <span>{{project.created_at}}</span>
+
+                    </div>
+                    <div class="blog-desc mb-2">
+                        <p>
+                            {{project.details}}
+                        </p>
+                    </div>
+
+
+                </div>
             </div>
-            <div class="col-lg-8 col-md-12 col-sm-12">
-                <div class="blog-title mb-3">
-                    <h3><a href="project">{{project.title}}</a></h3>
-                    TOTAL TARGET: <span style="color:dimgrey;">{{project.target}}</span>$
-                </div>
-                <div class="blog-date mb-2">
-                    CREATED : <span>{{project.created_at}}</span>
+            {% endfor %}
 
-                </div>
-                <div class="blog-desc mb-2">
-                    <p>
-                        {{project.details}}
-                    </p>
-                </div>
-
-
-            </div>
         </div>
-        {% endfor %}
-
     </div>
-</div>
-{% endblock %}
+    {% endblock %}

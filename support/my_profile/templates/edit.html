@@ -36,7 +36,6 @@
                                             </div>
                                         </div>
                                         <div class="text-center text-sm-right">
-                                            <!-- <span class="badge badge-secondary">administrator</span> -->
                                             <div class="text-muted"><small>{{user.created_at}}</small></div>
                                         </div>
                                     </div>
@@ -134,17 +133,7 @@
 </div>
 </div>
 
-<!-- <script>
-    // Get the modal
-    var modal = document.getElementById('id01');
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-    </script>  -->
+
 {% endblock %} {% block js%}
 <script>
     $(document).on('click', '.confirm-delete', function() {

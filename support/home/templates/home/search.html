@@ -1,19 +1,41 @@
-{% extends 'home/index.html' %} {% block content %} {% for project in search_result %}
-<div class="test" style="height:100vh; text-align: center; padding-top: 150px;">
-    <h1>{{project.title}}</h1>
-    <h6>{{project.details}}</h6>
-    <h6>{{project.target}}</h6>
-    <h6>{{project.created_at}}</h6>
-    <h6>{{project.start_date}}</h6>
-    <h6>{{project.end_date}}</h6>
-    <h6>{{project.category_id.cat_name}}</h6>
-    <h6>{{project.user_id.first_name}}</h6>
-    <h6>
-        {% for tag in pData.tags.all%}
-        <li class="list-group-item">
-            <a href="{% url 'show_tag' tag.name %}">{{tag.name}}</a>
-        </li>
-        {% endfor%}
-    </h6>
+{% extends 'home/index.html' %} {% block content %} {%load static%} {% block css %}
+
+<link rel="stylesheet" href="{% static 'projects/css/style.css' %}"> {% endblock %}
+
+
+<div class="test" style="height:100vh; text-align: center; ">
+
+    <h1 style="background-color: black;color: white;">Search Results</h1>
+    {% for info in search_result %}
+    <div class="container">
+        <div class="row main-row p-2">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="blog-img">
+                    <img src="{% static 'projects/images/p1.jpg' %}" alt="" class="img-fluid">
+                </div>
+
+            </div>
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <div class="blog-title mb-3 p-10">
+                    <h3><a href="{% url 'show_project' info.id%}">{{info.title}}</a></h3><br>
+                    <h4 style="color:dimgrey;"> Creation Time:{{info.created_at}}</h4><br>
+                    <h4 style="color:dimgrey;"> Start Time: {{info.start_date}}</h4><br>
+                    <h4 style="color:dimgrey;"> End Time: {{info.end_date}}</h4><br>
+                    <h4 style="color:dimgrey;"> Category: {{info.category_id.cat_name}}</h4><br>
+                    <h4 style="color:dimgrey;"> Category: {{info.user_id.first_name}}</h4>
+
+                </div>
+
+                <div class="container" style="font-size:24px;">
+                    <p>
+                        <h5 style="text-align: left;">Details</h5>
+                        {{info.details}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
-{% endfor %} {% endblock %}
+
+{% endblock %}
