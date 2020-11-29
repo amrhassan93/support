@@ -1,15 +1,24 @@
 {% extends "home/index.html" %}
+{% load static %}
+
+{% block style %}
+
+<link rel="stylesheet" href="{% static 'projects/css/stp.css' %}"> 
+
+{% endblock %}
 
 {% block content %}
 
 
 <form action="{% url 'updateComment'  comment.id project.id %}" method="post">
                 {% csrf_token %}
-                <span class="font-weight-bold text-primary" > 
-                       </span>
-                       <!-- {{comment.content}} -->
-            <input type="text" class="form-control input-lg" value="{{comment.content}}" name="content" />
-            <input type="submit" class="btn btn-primary" value="Edit" name="submit" />
+                <!-- <span class="font-weight-bold text-primary" > 
+                       </span> -->
+             <div class="input">
+                <input type="text" class="form-control" value="{{comment.content}}" name="content" />
+                <input type="submit" class="btn btn-success" value="Edit" name="submit" style="margin: 10px;" />
+             </div>          
+           
         </form>
 
 

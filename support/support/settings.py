@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_countries',
     'taggit',
-    'star_ratings'
+    'star_ratings',
+    'crispy_forms'
 
 ]
 

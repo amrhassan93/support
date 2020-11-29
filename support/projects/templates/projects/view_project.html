@@ -42,11 +42,11 @@
                   href="{% url 'reportProject' pData.id %}">Report project</a>
                    
             <a style="margin-top: 1rem;margin-bottom: 1rem;" class="btn btn-danger"
-            href="{% url 'project_delete' pData.id %}">Delete project</a>
+            href="{% url 'project_delete' pData.id %}" onclick="return confirm('Are you sure you want to delete this?')">Delete project</a>
            
             
             <div class="blog-date mb-2">
-                TOTAL TARGET  : <span>{{ pData.target }} </span>$
+                TOTAL TARGET  : <span>{{ pData.target }}$ </span>
              </div>
 
             <div class="blog-date mb-2">
@@ -77,10 +77,7 @@
             <div class="blog-date mb-2">
                 END : <span>{{pData.end_date}}</span>
              </div>
-             <div class="blog-date mb-2">
-                  Posted On : <span>{{pData.created_at}}</span>
-               </div>
-
+           
  
     </div>
     
@@ -126,23 +123,24 @@
     <div class="blog-desc mb-2">
       Details about this Project:  <p> {{pData.details }} </p>
     </div>
+    <div class="blog-date mb-2">
+      Posted On : <span>{{pData.created_at}}</span>
+   </div>
+
           </div>
          
 
       </div>
-
          
-<div class="card text-center">
+<div class="card-body">
       <form action="{% url 'donate' pData.id %}" method="POST" style="margin-left: 220; margin-top: 10;">
             <div class="donationbox">
-                  <!-- <div class="dollarsign">$</div> -->
-                  <input class="donationamount " name="donate" maxlength="6" tabindex="1" type="text"
+                  <input class="form-control" placeholder="give donation" name="donate" maxlength="6" tabindex="1" type="text"
                         onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
                         value="" required>
                   {% csrf_token %}
-                  <input type="submit" class="btn btn-success" value="Donate Now">
+                  <input type="submit" class="btn btn-success" value="Donate Now $">
 
-                  <!-- <input class="submit" type="submit" value="Donate Now"> -->
             </div>
       </form>
 </div>
@@ -156,8 +154,8 @@
 
 
 
-<div class="card">
-      <div class="card-body">
+<div class="card ">
+      <div class="card-body" >
             <h3 class="text-center">comments</h3>
             <form action="{% url 'create_comment' pData.id %}" method="POST">
                   <label for="rating">Your Comment:</label>
@@ -178,19 +176,19 @@
 <div class="card">
       <div class="card-body">
           <div class="card">
-                <div class="card-body">
+                <div class="card-body ">
                       <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-9 cont_label">
                               {{comment.content}}
                             </div>
-                            <a style="margin: 3px; color:red" href="{% url  'deleteComment'  comment.id pData.id%}">
+                            <a style="margin: 3px; color:red;padding: 10px;" href="{% url  'deleteComment'  comment.id pData.id%}">
 
                               <i class="fa fa-trash fa-lg " aria-hidden="true"></i>
                             </a>
-                            <a style="margin: 3px;color:green" href="{% url 'editComment' comment.id pData.id%}">
+                            <a style="margin: 3px;color:green;padding: 10px;" href="{% url 'editComment' comment.id pData.id%}">
                               <i class="fa fa-edit fa-lg " aria-hidden="true"></i>
                             </a>
-                            <a style="margin: 3px;" href="{% url 'reportComment' comment.id pData.id %}">
+                            <a style="margin: 3px;padding: 10px;" href="{% url 'reportComment' comment.id pData.id %}">
                               <i class="fa fa-ban text-danger fa-lg "></i>
                             </a>
                             
@@ -204,5 +202,12 @@
 <br>
 <br><br><br>
 
+{% block js%}
+<script>
+    $(document).on('click', '.confirm-delete', function() {
+        return confirm('Are you sure you want to delete this?');
+    })
+</script>
 
+{% endblock%}
 {% endblock %}
