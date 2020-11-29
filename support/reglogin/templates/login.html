@@ -1,36 +1,41 @@
 {% extends 'home/index.html' %} {% load static %}
 
 <head>
+    <title>Login</title>
     {% block style %}
     <link rel="stylesheet" href="{% static '/css/login.css' %}"> {% endblock %}
 </head>
 
 <body>
     {% block content %}
-    <div class="container pt-5">
+
+    <form method='post'>
+        {% csrf_token %} {{ form }}
+        <button type='submit' class=b 'tn btn-default'>Login</button>
+    </form>
+
+    <!-- <div class="container pt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 card login-form">
-                {% if form.errors %}
-                <p style="color: red;">{{ form.errors }}</p>
-                {% endif %}
                 <form method="POST">
+                    {% csrf_token %}
                     <div class="form-group">
                         <h1 class="text-center">Sign in</h1>
                         <hr>
-                        <label for="Email">Email address</label>
-                        <input type="email" name="email " class="form-control " id="email1 " placeholder="Enter Your Email ">
+                        <label for="User name">user name</label>
+                        <input type="text" name="username " class="form-control " id="username " placeholder="Enter Username ">
                         <label for="Password "> Password</label>
-                        <input type="password" name="password " class="form-control " id="Password1 " placeholder="Password ">
+                        <input type="password" name="password " class="form-control " id="Password " placeholder="Your Password ">
                     </div>
                     <div class="text-center">
                         <button type="submit " class="btn btn-primary">Login</button> <br><br>
                         <button type="submit " class="fab fa-facebook-f btn btn-primary">&nbsp; Login With Facebook</button><br>
-                        <a href=" ">Forgot your password?</a>
+                        <a href="{% url 'password_reset' %}">Forgot your password?</a>
                         <label for="signup ">Don't have an account? <a href="signup">Sign up</a> </label>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
     {% endblock %}
 </body>
