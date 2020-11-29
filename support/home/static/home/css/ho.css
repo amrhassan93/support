@@ -1,4 +1,4 @@
-body{
+*{
     margin: 0px;
     padding: 0px;
 }
@@ -12,4 +12,18 @@ body{
 .carousel-item img{
     height: 600px;
     width: 100%;
+}
+
+
+h1{
+    color: white;
+    font-weight:bold;
+}
+
+.card{
+    padding: 10px;
+    margin-top:5px !important;
+    height:96% !important ;
+    width: 95% !important ;
+
 }

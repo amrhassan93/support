@@ -1,0 +1,94 @@
+{% extends 'home/index.html' %} {% block content %}
+
+{%load static%}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'projects/css/style.css' %}"> 
+   
+{% endblock %}
+
+<div class="test" style="height:100vh; text-align: center; ">
+
+    <h1 style="background-color: black;color: white;">Search Results</h1>
+
+    <div class="container">
+        <div class="row main-row p-2">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="blog-img">
+                <img src="{% static 'projects/images/p1.jpg' %}" alt="" class="img-fluid">
+            </div>
+            
+    </div>
+    {% for info in search_result %}
+    <div class="col-lg-8 col-md-12 col-sm-12">
+        <div class="blog-title mb-3">
+            <h3><a href="">{{info.title}}</a></h3><br>
+            <h4  style="color:dimgrey;">  Creation Time:{{info.created_at}}</h4><br>
+            <h4  style="color:dimgrey;"> Start Time: {{info.start_date}}</h4><br>
+            <h4  style="color:dimgrey;"> End Time: {{info.end_date}}</h4><br>  
+            <h4  style="color:dimgrey;"> Category: {{info.category_id.cat_name}}</h4><br>
+            <h4  style="color:dimgrey;"> Category: {{info.user_id.first_name}}</h4>
+
+        </div>
+    
+    <div class="container" style="font-size:24px;">
+        <p>
+            <h5 style="text-align: left;">Details</h5>
+     {{info.details}}
+        </p>
+    </div>
+    </div>
+    {% endfor %}
+    </div>
+    </div>
+
+    <h6>
+        {% for tag in pData.tags.all%}
+        <li class="list-group-item">
+            <a href="{% url 'show_tag' tag.name %}">{{tag.name}}</a>
+        </li>
+        {% endfor%}
+    </h6>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<div class="container">
+    <div class="row">
+
+    <div class="col-md p-6 ">
+        
+        <h1 style="color: red;">Project</h1>
+        <div style="border: 1px solid;padding: 15px; box-shadow: 5px 10px;font-size:25px;">{{search_result.title}}</div>
+        <h1 style="color: red;margin-top:5px;">Details</h1>
+        <div style="border: 1px solid;padding: 15px; box-shadow: 5px 10px;font-size:25px;">{{search_result.details}}</div>
+        <h1 style="color: red;margin-top:5px;">Target</h1>
+        <div style="border: 1px solid;padding: 15px; box-shadow: 5px 10px;font-size:25px;">{{search_result.target}}</div>
+        <h1 style="color: red;margin-top:5px;">Time Of Creation</h1>
+        <div style="border: 1px solid;padding: 15px; box-shadow: 5px 10px;font-size:25px;"></div>
+        <h1 style="color: red;margin-top:5px;">Start Date</h1>
+        <div style="border: 1px solid;padding: 15px; box-shadow: 5px 10px;font-size:25px;">{{search_result.start_date}}</div>
+        <h1 style="color: red;margin-top:5px;">End Date</h1>
+        <div style="border: 1px solid;padding: 15px; box-shadow: 5px 10px;font-size:25px;">{{search_result.end_date}}</div>
+        <h1 style="color: red;margin-top:5px;">Category</h1>
+        <div style="border: 1px solid;padding: 15px; box-shadow: 5px 10px;font-size:25px;">{{search_result.category_id.cat_name}}</div>
+        <h1 style="color: red;margin-top:5px;">User</h1>
+        <div style="border: 1px solid;padding: 15px; box-shadow: 5px 10px;font-size:25px;">{{search_result.user_id.first_name}}</div>
+ </div>
+
+</div>
+</div>     -->
