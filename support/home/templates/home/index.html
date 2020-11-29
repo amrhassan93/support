@@ -8,6 +8,8 @@
     <title>base</title>
 
     {% block style %} {% endblock %}
+    {% block css %} {% endblock %}
+
     <link rel="stylesheet" href="{% static 'home/css/index.css' %}">
 
     <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
@@ -71,45 +73,9 @@
     </div>
     {% endfor %} {% endif %}
 
-    <div class="container " style="margin: 200px; ">
-        <div class="row ">
-            {% for project in highest_five_rated %}
-            <!-- <div class="project " style="height: 100vh; margin-top: 100px; text-align: center; ">
-        <h1>{{project.title}}</h1>
-        <h6>{{project.details}}</h6>
-        <h6>{{project.target}}</h6>
-        <h6>{{project.created_at}}</h6>
-        <h6>{{project.start_date}}</h6>
-        <h6>{{project.end_date}}</h6>
-        <h6>{{project.category_id.cat_name}}</h6>
-        <h6>{{project.user_id.first_name}}</h6>
-    </div> -->
-
-
-
-            <div class="col-md-4 ">
-                <div class="card ls1 ">
-                    <img class="card-img-left text-center " src=" " alt=" " style="background-color:red; ">
-                    <div class="card-body ">
-                        <h3>{{project.title}}</h3>
-                        <p></p>
-                        <br><br>
-                        <a href="# " class="btn btn-primary ">{{project.details}}</a>
-
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-
-        </div>
-    </div>
-
 
 
     {% endblock %}
-
-
-
 
 
 
