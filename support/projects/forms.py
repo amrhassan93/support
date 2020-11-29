@@ -1,5 +1,5 @@
 
-from .models import Project,ProjectPicture
+from .models import *
 from django.utils import timezone
 from django.forms import ModelForm
 from django import forms
@@ -11,7 +11,7 @@ class ProjectsForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ['title', 'details', 'target',
-                  'start_date', 'end_date', 'category_id', 'tags']
+                  'start_date', 'end_date', 'category_id', 'tags','user_id']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -26,6 +26,21 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = ProjectPicture
         fields = ['img_url', ]
+
+   
+
+
+# class reviewform(forms.ModelForm):
+    
+#     class Meta:
+#         model=Comments
+#         fields=['content',]
+       
+# class rateform(forms.ModelForm):
+
+#     class Meta:
+#         model=Rating
+#         fields=['value',]
 
 
 

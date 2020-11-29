@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap4',
     'django_countries',
-    'taggit'
+    'taggit',
+    'star_ratings'
 
 ]
 
@@ -139,8 +140,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, ('staticfiles'))
 STATICFILES_DIRS = [
@@ -150,3 +155,5 @@ STATICFILES_DIRS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 TAGGIT_CASE_INSENSITIVE = True
+# STAR_RATINGS_RATING_MODEL = 'projects.Rating'
+

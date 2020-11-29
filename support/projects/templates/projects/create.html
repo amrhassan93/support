@@ -1,12 +1,19 @@
 {% extends 'home/index.html' %}
 {% load crispy_forms_tags %}
+
 {% load static %}
 
-{% block style %}
-<link rel="stylesheet" type="text/css" href="{% static 'projects/css/bootstrap-tagsinput.css' %}">
-{% endblock %}
 
+
+{% block style %}
+
+<link rel="stylesheet" href="{% static 'projects/css/stylec.css' %}"> 
+   
+{% endblock %}
 {% block content %}
+
+
+
 
 <form class="create_s" method="post" enctype="multipart/form-data">
   {% csrf_token %}
@@ -17,8 +24,10 @@
         {{ form.details|as_crispy_field }}
         {{ form.target|as_crispy_field }}
         {{ form.start_date|as_crispy_field }}
-        {{ form.end_date|as_crispy_field }} 
+        {{ form.end_date|as_crispy_field }}
         {{ form.category_id|as_crispy_field }}
+        {{ form.user_id|as_crispy_field }}
+
         <div class="form-group">
           <label>Tags</label>
           <input type="text" data-role="tagsinput" class="form-control" name="tags">
@@ -26,19 +35,25 @@
       </div>
       <div class="col-8">
         {{ formset|crispy }}
+        <button type="submit" class="boy btn btn-success ">Create Project</button>
+
       </div>
     </div>
   </div>
   <br>
-  <!-- error in btn -->
-  <button type="submit" class="boy btn btn-success ">Create Project</button>
-  <br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+
 </form>
 {% block js %}
-<!-- <script type="text/javascript" src="{% static 'projects/js/bootstrap-tagsinput.js' %}"></script> -->
+<script type="text/javascript" src="{% static 'js/bootstrap-tagsinput.js' %}"></script>
 {% endblock %}
 
 
 {% endblock %}
-
-

@@ -15,11 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
+from projects import views
+from . import  settings
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+from django.views.generic import RedirectView
+from django.conf.urls import url
+ 
+ 
+urlpatterns = staticfiles_urlpatterns()
+urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/' , include('home.urls')) , 
     path('reglogin/' , include('reglogin.urls')),
     path('projects/' ,include('projects.urls')),
-    path('profile/',include('my_profile.urls'))
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
+    path('profile/',include('my_profile.urls')),
+
+    
 ]

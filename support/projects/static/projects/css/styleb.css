@@ -1,0 +1,81 @@
+
+
+  .donationamount {
+    background: #35586A;
+    height: 100px;
+    line-height: 100px;
+    width: 314px;
+    font-size: 30px;
+    color: #ffffff;
+    border-top: 1px solid #E8E8E8;
+    border-bottom: 1px solid #E8E8E8;
+    border-left: 0;
+    border-right: 0;
+    font-family: 'Montserrat', sans-serif;
+    padding-left: 10px;
+    float: left;
+    outline: none;
+    z-index: 1;
+    border-radius: 0px 25px 25px 0px
+    
+}
+
+.donationbox {
+    width: 700px;
+    height: 110px;
+    border-radius: 25px;
+}
+element.style {
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    left: 26px;
+}
+
+.dollarsign {
+    float: left;
+    background: #396880;
+    height: 100px;
+    width: 58px;
+    padding-left: 0px;
+    font-size: 20px;
+    color: #ffffff;
+    border-top: 1px solid #E8E8E8;
+    border-bottom: 1px solid #E8E8E8;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    letter-spacing: -5px;
+    line-height: 100px;
+    border-radius: 25px 0px 0px 25px
+}
+div {
+    display: block;
+}
+
+.donate{
+    font-size: 4.5rem;
+    float: left;
+    height: 0;
+    margin-top: 10px;
+    margin-left: 35;
+}
+.submit {
+    background: #35586A;
+    height: 100px;
+    line-height: 100px;
+    width: 314px;
+    font-size: 30px;
+    color: #ffffff;
+    border-top: 1px solid #E8E8E8;
+    border-bottom: 1px solid #E8E8E8;
+    border-left: 0;
+    border-right: 0;
+    font-family: 'Montserrat', sans-serif;
+    padding-left: 10px;
+    border-radius: 25px;
+    font-weight: bolder;
+}
+#carouselExampleInterval {
+  
+margin: 10px;
+} 
+

@@ -8,11 +8,10 @@ from taggit.managers import TaggableManager
 from django.core.validators import MaxValueValidator, MinValueValidator
 from reglogin.models import Users
 
-# from users.models import Profile
+
+# from Users.models import Profile
 
 
-
-# Create your models here.
 
 
 class Category(models.Model):
@@ -38,13 +37,15 @@ class Project(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-    def _str_(self):
-        return self.title
+    class Meta:
+        ordering = ('title',)
+
 
 class Rating(models.Model):
     value = models.IntegerField(default=1,validators=[MaxValueValidator(100), MinValueValidator(1)])
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    
     
 
 
@@ -59,14 +60,13 @@ class ProjectPicture(models.Model):
     img_url = models.ImageField(upload_to='static/projects/images/', verbose_name='Image')
 
    
-    def __str__(self):
-        return str(self.Project.title)
+    
 
 
 class Comments(models.Model):
     
     content = models.TextField(max_length=3000, blank=False,default="some string")
-    project_id = models.ForeignKey("Project", on_delete=models.CASCADE)
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
