@@ -6,5 +6,5 @@ urlpatterns = [
     path('' , view_home, name='home'),
     path('home' , view_index ),
     path('search/', search , name ='search')
-    # path('createhome',create_home)
+    
 ]
